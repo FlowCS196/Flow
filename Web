@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style>
+		<!--SCROLLING-->
+		div.scroll {
+		background-color: #FFFFFF;
+		width: 700px;
+		height: 200px;
+		overflow: scroll;
+		}
+
+		<!--DRAGGING-->
+		
+	</style>
+</head>
+
+<body>
+	<div class="scroll">
+	testtestestestestetesetsetesetsetsetsesteststetestsetestsetsetsetsetsetsetsetsetsetsetsetseteettestsetstestsesetsetsetsetsetsetsetsetsetse
+	</div>
+</body>
+</html>
