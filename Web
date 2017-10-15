@@ -11,7 +11,21 @@
 		}
 
 		<!--DRAGGING-->
-		
+		<script>
+		function allowDrop(ev) {
+    ev.preventDefault();
+		}
+
+		function drag(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
+	  }
+
+    function drop(ev) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+    ev.target.appendChild(document.getElementById(data));
+}
+		</script>
 	</style>
 </head>
 
@@ -19,5 +33,18 @@
 	<div class="scroll">
 	testtestestestestetesetsetesetsetsetsesteststetestsetestsetsetsetsetsetsetsetsetsetsetsetseteettestsetstestsesetsetsetsetsetsetsetsetsetse
 	</div>
+	<h2>Drag and Drop</h2>
+	<p>Drag the image back and forth between the two div elements.</p>
+
+	<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)">
+
+  <img src="https://static.pexels.com/photos/39517/rose-flower-blossom-bloom-39517.jpeg" draggable="true" ondragstart="drag(event)" id="drag1" width="88" height="31">
+
+  <img src="http://i.stack.imgur.com/rfo8w.png" draggable="true" ondragstart="drag(event)" id="drag1" width="88" height="31">
+	</div>
+
+	<div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+
+
 </body>
 </html>
