@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>titulo de mi pagina</title>
+<style>
+    #target {
+        width: 100px;
+        height: 100px;
+        background-color: #ffc;
+        border: 2px solid blue;
+        position: absolute;
+    }
+</style>
+<script>
+   window.onload = function() {
+        var el = document.getElementById('target');
+        var mover = false, x, y, posx, posy, first = true;
+        el.onmousedown = function() {
+            mover = true;
+        };
+        el.onmouseup = function() {
+            mover = false;
+            first = true;
+        };
+        el.onmousemove = function(e) {
+            if (mover) {
+                if (first) {
+                    x = e.offsetX;
+                    y = e.offsetY;
+                    first = false;
+                }
+                posx = e.pageX - x;
+                posy = e.pageY - y;
+                this.style.left = posx + 'px';
+                this.style.top = posy + 'px';
+            }
+        };
+   }
+</script>
+</head>
+<body>
+    <div id="target" style="left: 10px; top:20px"></div>
+</body>
+</html>
