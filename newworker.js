@@ -1,16 +1,16 @@
 const closer = (word) => {
-	this.postMessage(["e", word])
+	this.postMessage(['e', word])
 }
 
 const printer = (word) => {
-	this.postMessage(["p", word]);
+	this.postMessage(['p', word]);
 }
 
 const cleaner = () => {
-	this.postMessage(["c"]);
+	this.postMessage(['c']);
 }
 const inputter = (word, next) => {
-	this.postMessage(["i", next.toString(), word]);
+	this.postMessage(['i', next.toString(), word]);
 }
 
 const sleeper = (milliseconds) => {
@@ -67,7 +67,7 @@ const $functions = [];
 }*/
 
 this.onmessage = function (event) {
-	if (event.data[0] === 'i') {
+	if (event.data[0] == 'i') {
 		run (event.data[1], event.data[2]);
 	} else {
 		creator(event.data);
