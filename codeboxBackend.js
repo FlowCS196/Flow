@@ -5,6 +5,7 @@ var codeBoxArr = [];
  * @param {string} type is the type of the box. 
  *                      'f' means 'first', or the starting block. It leads to its primary connection box.
  *                      's' means a simple box that leads to its primary connection box.
+ *                      'i' means 'input'. It prompts the user to enter an expression that is assigned to the variable it contains. It leads to its primary connection box.
  *                      'c' means 'conditional'. It leads to its primary connection box if its condition it true. Else, it leads to its secondary connection box.
  *                      'e' means 'end'. The program halts when these boxes are reached. We do not actually need these right now.
  */
