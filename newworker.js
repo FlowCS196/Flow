@@ -6,6 +6,10 @@ const printer = (word) => {
 	this.postMessage(['p', word]);
 }
 
+const printerln = (word) => {
+	printer(word + '\n');
+}
+
 const cleaner = () => {
 	this.postMessage(['c']);
 }
@@ -33,6 +37,7 @@ const complexEvaluator = (words) => {
 		inputter(words[1], words[2]);
 		return -1;
 	} else if (words[0] == 'e') {
+		eval(words[1]);
 		closer("");
 		return -1;
 	}

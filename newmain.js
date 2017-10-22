@@ -53,15 +53,13 @@ addBox('f');
 addBox('s');
 addBox('s');
 addBox('c');
-addBox('s');
-addBox('s');
+addBox('e');
 
 primaryConnect('0','1');
 primaryConnect('1','2');
 primaryConnect('2', '3');
 primaryConnect('3','4');
 secondaryConnect('3', '2');
-primaryConnect('4','5');
 
 var box = document.getElementById('textbox');
 var worker = null;
@@ -78,7 +76,7 @@ runner.onclick = function() {
     worker.onmessage = function(event) {
         var pos;
         if (event.data[0] == 'p') {
-            box.value += "" + event.data[1] + '\n';
+            box.value += "" + event.data[1];
         } else if (event.data[0] == 'c') {
             box.value = "";
         } else if (event.data[0] == 'i') {

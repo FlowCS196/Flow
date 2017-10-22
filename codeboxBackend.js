@@ -1,13 +1,14 @@
 var codeBoxArr = [];
-
 /**
  * Creates a div that has a textarea as a child. These will be the diagram boxes that you can drag around and fill with code.
+ * Primary connection: If a box directly leads to another, there is a primary connection between the two boxes.
+ * Secondary connection: Conditional boxes have these. If the condition is false, they lead to the box with which they have a seconday connection.
  * @param {string} type is the type of the box. 
- *                      'f' means 'first', or the starting block. It leads to its primary connection box.
+ *                      'f' means 'first', or the starting block. It leads to its primary connection box. There should always be exactly one of these on the screen. What is written inside them doesn't matter.
  *                      's' means a simple box that leads to its primary connection box.
  *                      'i' means 'input'. It prompts the user to enter an expression that is assigned to the variable it contains. It leads to its primary connection box.
  *                      'c' means 'conditional'. It leads to its primary connection box if its condition it true. Else, it leads to its secondary connection box.
- *                      'e' means 'end'. The program halts when these boxes are reached. We do not actually need these right now.
+ *                      'e' means 'end'. The program halts when these boxes are reached. The code inside them is executed before this happens.
  */
 function addBox(type) {
     function actualAdd(index) {
@@ -33,9 +34,15 @@ function addBox(type) {
     actualAdd(codeBoxArr.length);
 }
  
-//index is the ID of the box you are removing
+/**
+ * Deletes a code diagram box that has been created before. It also removes all the connections this box has to others.
+ * @param {*} index is the ID of the box your are deleting.
+ */
 function removeBox(index) {
     document.body.removeChild(codeBoxArr[parseInt(index)][0]);
+    primaryUnconnectStart(index);
+    secondaryUnconnectStart(index);
+    unconnectEnd(index);
     codeBoxArr[parseInt(index)] = null;
 }
 
@@ -48,6 +55,7 @@ function primaryConnect(startIndex, endIndex) {
     codeBoxArr[end][5].push(start);
 }
 
+//You are setting a primary connection from the box with ID startIndex to the box with ID endIndex.
 function secondaryConnect(startIndex, endIndex) {
     let start = parseInt(startIndex);
     let end = parseInt(endIndex);
@@ -66,6 +74,7 @@ function primaryUnconnectStart(startIndex) {
     codeBoxArr[end][5] = codeBoxArr[end][5].filter(num => num != start);
 }
 
+//You are removing the secondary connection from the box with ID startIndex. The endIndex is already known.
 function secondaryUnconnectStart(startIndex) {
     let start = parseInt(startIndex);
     let end = codeBoxArr[start][4];
@@ -86,8 +95,7 @@ function unconnectEnd(endIndex) {
 }
 
 
-
-
+// Creates code out of the boxes, using the code inside their textareas and their connections.
 function codeMaker() {
     code = [];
     var start;
@@ -108,9 +116,8 @@ function codeMaker() {
                 line.push(tmp[4]);
             }
         } else {
-            line = ['e'];
+            line[0] = 'e';
         }
-        code.push(line);
         code.push(line);
     }
     for (let i = start + 1; i < codeBoxArr.length; ++i) {
@@ -122,7 +129,7 @@ function codeMaker() {
                 line.push(tmp[4]);
             }
         } else {
-            line = ['e'];
+            line[0] = 'e';
         }
         code.push(line);
     }
