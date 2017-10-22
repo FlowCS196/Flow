@@ -33,10 +33,10 @@ function addBox(type) {
     actualAdd(codeBoxArr.length);
 }
  
-//index is the index of the box you are removing
+//index is the ID of the box you are removing
 function removeBox(index) {
-    document.body.removeChild(codeBoxArr[index][0]);
-    codeBoxArr[index] = null;
+    document.body.removeChild(codeBoxArr[parseInt(index)][0]);
+    codeBoxArr[parseInt(index)] = null;
 }
 
 
@@ -128,6 +128,3 @@ function codeMaker() {
     }
     return code;
 }
-
-
-
