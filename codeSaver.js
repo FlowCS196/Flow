@@ -47,12 +47,6 @@ loadButton.onclick = function () {
 	box.value = stringArr;
 	codeBoxArr = JSON.parse(stringArr);
 
-
-
-
-
-
-
 	for (let i = 0; i < codeBoxArr.length; ++i) {
 		let myDiv = document.getElementById("" + i);
 		if (myDiv === null) {
