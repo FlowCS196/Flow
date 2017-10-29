@@ -28,7 +28,7 @@ funcs.push(["s", "cleaner()", 4]);
 funcs.push(["s", "printer(num); sleeper(1000)", 5]);
 funcs.push(["s", "++num", 2]);*/
 
-/*addBox('f');
+addBox('f');
 addBox('s')
 addBox('i');
 addBox('c');
@@ -41,13 +41,8 @@ primaryConnect('1','2');
 primaryConnect('2','3');
 primaryConnect('3','4');
 secondaryConnect('3','6');
-primaryConnect('4','5');
-primaryConnect('5','6');
-primaryConnect('6','3');
-secondaryUnconnectStart('3');
-secondaryConnect('3', '6');
-unconnectEnd('5');
-primaryConnect('4', '5');*/
+primaryConnect('4', '5');
+primaryConnect('5', '3');
 
 /*addBox('f');
 addBox('s');

@@ -1,5 +1,5 @@
 function stringHexer(str) {
-	let saveString = ""
+	let saveString = "";
 	for (let i = 0; i < str.length; ++i) {
 		let hex = "" + str.charCodeAt(i).toString(16);
 		let prefix = "";
@@ -12,10 +12,10 @@ function stringHexer(str) {
 }
 
 function hexStringer(str) {
-    let loadString = ""
+	let loadString = "";
     for (let i = 0; i < str.length - 3; i += 4) {
-	    loadString += String.fromCharCode(parseInt('0x' + str[i] + str[i+1] + str[i+2] + str[i+3]));
-    }
+		loadString += String.fromCharCode(parseInt('0x' + str[i] + str[i+1] + str[i+2] + str[i+3]));
+	}
     return loadString;
 }
 
@@ -35,6 +35,8 @@ loadButton.onclick = function () {
 	let myCookies = document.cookie.split(";");
 	for (let i = 0; i < myCookies.length; ++i) {
 		let thisCookie = myCookies[i].split("=");
+		//WE NEED TO REMOVE WHITESPACE!
+		thisCookie[0] = thisCookie[0].replace(/\s/g, "");
 		if (thisCookie[0] == fileName) {
 			stringArr = hexStringer(thisCookie[1]);
 			break;
