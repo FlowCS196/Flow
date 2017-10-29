@@ -2,28 +2,75 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>titulo de mi pagina</title>
+<title>title of my page</title>
 <style>
     #target {
         width: 100px;
         height: 100px;
         background-color: #ffc;
+        border: 2px solid red;
+        position: absolute;
+    }
+    #target2 {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background: #555;
+        background-color: #ffc;
         border: 2px solid blue;
         position: absolute;
     }
+    #diamond-narrow {
+	     width: 0;
+	     height: 0;
+	     border: 50px solid transparent;
+	     border-bottom: 70px solid red;
+	     position: relative;
+	     top: -50px;
+  }
+    #diamond-narrow:after {
+	    content: '';
+	    position: absolute;
+	    left: -50px; top: 70px;
+	    width: 0;
+	    height: 0;
+	    border: 50px solid transparent;
+	    border-top: 70px solid red;
+}
 </style>
 <script>
    window.onload = function() {
         var el = document.getElementById('target');
+        var el2 = document.getElementById('target2');
         var mover = false, x, y, posx, posy, first = true;
         el.onmousedown = function() {
+            mover = true;
+        };
+        el2.onmousedown = function() {
             mover = true;
         };
         el.onmouseup = function() {
             mover = false;
             first = true;
         };
+        el2.onmouseup = function() {
+            mover = false;
+            first = true;
+        };
         el.onmousemove = function(e) {
+            if (mover) {
+                if (first) {
+                    x = e.offsetX;
+                    y = e.offsetY;
+                    first = false;
+                }
+                posx = e.pageX - x;
+                posy = e.pageY - y;
+                this.style.left = posx + 'px';
+                this.style.top = posy + 'px';
+            }
+        };
+        el2.onmousemove = function(e) {
             if (mover) {
                 if (first) {
                     x = e.offsetX;
@@ -41,5 +88,6 @@
 </head>
 <body>
     <div id="target" style="left: 10px; top:20px"></div>
+    <div id="target2" style="left: 10px; top:140px"></div>
 </body>
 </html>
