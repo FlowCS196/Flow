@@ -25,7 +25,7 @@ saveButton.onclick = function () {
 		codeBoxArr[i][8] = codeBoxArr[i][1].value
 	}
 	let fileName = prompt("File Name?");
-	document.cookie = stringHexer(fileName) + "=" + stringHexer(JSON.stringify(codeBoxArr));
+	document.cookie = stringHexer(fileName) + "=" + stringHexer(JSON.stringify(codeBoxArr)) + ";expires=Tue, 19 Jan 2038 03:14:07 UTC"
 };
 
 var loadButton = document.getElementById("loadButton");
@@ -44,29 +44,31 @@ loadButton.onclick = function () {
 		alert("No such file exists. Did you type correctly?");
 		return;
 	}
-	box.value = stringArr;
+	for (let i = 0; i < codeBoxArr.length; ++i) {
+		let myDiv = document.getElementById("" + i);
+		if (myDiv !== null) {
+			while (myDiv.firstChild) {
+				myDiv.removeChild(myDiv.firstChild);
+			}
+			document.body.removeChild(myDiv);
+		}
+	}
 	codeBoxArr = JSON.parse(stringArr);
 
 	for (let i = 0; i < codeBoxArr.length; ++i) {
-		let myDiv = document.getElementById("" + i);
-		if (myDiv === null) {
-			codeBoxArr[i][0] = document.createElement("div");
-			codeBoxArr[i][1] = document.createElement("textarea");
+		
+		codeBoxArr[i][0] = document.createElement("div");
+		codeBoxArr[i][1] = document.createElement("textarea");
 
-			codeBoxArr[i][0].id = "" + i;
-			codeBoxArr[i][0].className = codeBoxArr[i][2] + "_box";
-			codeBoxArr[i][1].className = codeBoxArr[i][2] + "_code";
+		codeBoxArr[i][0].id = "" + i;
+		codeBoxArr[i][0].className = codeBoxArr[i][2] + "_box";
+		codeBoxArr[i][1].className = codeBoxArr[i][2] + "_code";
 
-			codeBoxArr[i][1].value = codeBoxArr[i][8];
+		codeBoxArr[i][1].value = codeBoxArr[i][8];
 			
-			codeBoxArr[i][0].appendChild(codeBoxArr[i][1]);
-			document.body.appendChild(codeBoxArr[i][0]);
+		codeBoxArr[i][0].appendChild(codeBoxArr[i][1]);
+		document.body.appendChild(codeBoxArr[i][0]);
 
-		} else {
-			codeBoxArr[i][0] = myDiv;
-			codeBoxArr[i][1] = myDiv.firstChild;
-			codeBoxArr[i][1].value = codeBoxArr[i][8];
-		}
 		if (codeBoxArr[i][3] === null) {
 			codeBoxArr[i][3] = undefined;
 		}

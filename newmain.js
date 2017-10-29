@@ -49,7 +49,7 @@ secondaryConnect('3', '6');
 unconnectEnd('5');
 primaryConnect('4', '5');*/
 
-/*addBox('f');
+addBox('f');
 addBox('s');
 addBox('s');
 addBox('c');
@@ -59,7 +59,7 @@ primaryConnect('0','1');
 primaryConnect('1','2');
 primaryConnect('2', '3');
 primaryConnect('3','4');
-secondaryConnect('3', '2');*/
+secondaryConnect('3', '2');
 
 
 var box = document.getElementById('textbox');
