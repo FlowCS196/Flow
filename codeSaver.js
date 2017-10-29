@@ -1,48 +1,17 @@
-function stringHexer(str) {
-	let saveString = "";
-	for (let i = 0; i < str.length; ++i) {
-		let hex = "" + str.charCodeAt(i).toString(16);
-		let prefix = "";
-		for (let j = hex.length; j < 4; ++j) {
-			prefix += '0';
-		}
-		saveString += prefix + hex;
-	}
-	return saveString;
-}
-
-function hexStringer(str) {
-	let loadString = "";
-    for (let i = 0; i < str.length - 3; i += 4) {
-		loadString += String.fromCharCode(parseInt('0x' + str[i] + str[i+1] + str[i+2] + str[i+3]));
-	}
-    return loadString;
-}
-
 var saveButton = document.getElementById("saveButton");
 saveButton.onclick = function () {
 	for (let i = 0; i < codeBoxArr.length; ++i) {
 		codeBoxArr[i][8] = codeBoxArr[i][1].value
 	}
 	let fileName = prompt("File Name?");
-	document.cookie = stringHexer(fileName) + "=" + stringHexer(JSON.stringify(codeBoxArr)) + ";expires=Tue, 19 Jan 2038 03:14:07 UTC"
+	localStorage.setItem(fileName, JSON.stringify(codeBoxArr));
 };
 
 var loadButton = document.getElementById("loadButton");
 loadButton.onclick = function () {
-	let stringArr = "";
-	let fileName = stringHexer(prompt("File Name?"));
-	let myCookies = document.cookie.split(";");
-	for (let i = 0; i < myCookies.length; ++i) {
-		let thisCookie = myCookies[i].split("=");
-		//WE NEED TO REMOVE WHITESPACE!
-		thisCookie[0] = thisCookie[0].replace(/\s/g, "");
-		if (thisCookie[0] == fileName) {
-			stringArr = hexStringer(thisCookie[1]);
-			break;
-		}
-	}
-	if (stringArr == "") {
+	let fileName = prompt("File Name?");
+	let stringArr = localStorage.getItem(fileName);
+	if (stringArr === null) {
 		alert("No such file exists. Did you type correctly?");
 		return;
 	}
