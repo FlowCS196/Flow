@@ -1,0 +1,71 @@
+#draggable { 
+  width: 150px; 
+  height: 150px; 
+  padding: 0.5em;
+  border-style: solid;
+  border-width: 1px;
+  border-color: black;
+  background-color: white;
+}
+.scroll {
+  color: black;
+  background-color: #FFFFFF;
+  width: 100%;
+  height: 200px;
+  overflow: scroll;
+}
+html,body,h1,h2,h3,h4,h5,h6 {
+  font-family: "Roboto", sans-serif;
+}
+.w3-sidebar {
+  z-index: 3;
+  width: 250px;
+  top: 43px;
+  bottom: 0;
+  height: inherit;
+}
+.f_box {
+  width: 150px; 
+  height: 150px; 
+  padding: 0.5em;
+  border-style: solid;
+  border-width: 10px;
+  border-color: black;
+  background-color: blue;
+}
+.s_box {
+  width: 150px; 
+  height: 150px; 
+  padding: 0.5em;
+  border-style: solid;
+  border-width: 10px;
+  border-color: black;
+  background-color: blue;
+}
+.c_box {
+  width: 150px; 
+  height: 150px; 
+  padding: 0.5em;
+  border-style: solid;
+  border-width: 10px;
+  border-color: black;
+  background-color: blue;
+}
+.i_box {
+  width: 150px; 
+  height: 150px; 
+  padding: 0.5em;
+  border-style: solid;
+  border-width: 10px;
+  border-color: black;
+  background-color: blue;
+}
+.e_box {
+  width: 150px; 
+  height: 150px; 
+  padding: 0.5em;
+  border-style: solid;
+  border-width: 10px;
+  border-color: black;
+  background-color: blue;
+}
