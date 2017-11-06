@@ -38,6 +38,5 @@ function moveBox(e) {
     if (currentlyDragged) {
         currentlyDragged.style.top = mouseY + offsetY + "px";
         currentlyDragged.style.left = mouseX + offsetX + "px";
-        console.log(currentlyDragged.style.left + ", " + currentlyDragged.style.top);
     }
 }
