@@ -45,7 +45,8 @@ secondaryConnect('3','6');
 primaryConnect('4', '5');
 primaryConnect('5', '3');*/
 
-/*addBox('f');
+addBox('f');
+/*
 addBox('s');
 addBox('s');
 addBox('c');

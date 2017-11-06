@@ -30,7 +30,12 @@ function addBox(type) {
         //Give a class name to the textarea that is the child of the box. The names are in the format type_code.
         codeBox[1].className = type + "_code";
 
-        codeBox[1].value = "";
+        if (type != "omega") {
+            codeBox[1].value = "";
+        } else {
+            codeBox[1].value = "START";
+            codeBox[1].readOnly = "readonly";
+        }
 
         codeBox[0].appendChild(codeBox[1]);
 
@@ -52,6 +57,9 @@ function addBox(type) {
  * @param {*} index is the ID of the box your are deleting.
  */
 function removeBox(index) {
+    if (codeBoxArr[parseInt(index)][2] == "f") {
+        return;
+    }
     space.removeChild(codeBoxArr[parseInt(index)][0]);
     primaryUnconnectStart(index);
     secondaryUnconnectStart(index);
@@ -116,7 +124,7 @@ function codeMaker() {
         if (codeBoxArr[i][2] == 'f') {
             start = i;
             let tmp = codeBoxArr[i];
-            code.push(['s', "", tmp[3]]);
+            code.push(['s', tmp[1].value, tmp[3]]);
             break;
         }
     }
