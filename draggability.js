@@ -33,8 +33,8 @@ function mouseUp(e) {
 }
 
 function moveBox(e) {
-    mouseX = e.screenX;
-    mouseY = e.screenY;
+    mouseX = e.pageX;
+    mouseY = e.pageY;
     if (currentlyDragged) {
         currentlyDragged.style.top = mouseY + offsetY + "px";
         currentlyDragged.style.left = mouseX + offsetX + "px";
