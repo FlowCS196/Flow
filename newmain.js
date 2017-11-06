@@ -36,6 +36,7 @@ addBox('s');
 addBox('s');
 addBox('s');
 
+
 primaryConnect('0','1');
 primaryConnect('1','2');
 primaryConnect('2','3');
@@ -58,6 +59,7 @@ secondaryConnect('3', '2');*/
 
 
 var box = document.getElementById('textbox');
+box.value = "";
 var worker = null;
 var runner = document.getElementById('runButton');
 var stopper = document.getElementById('stopButton');
@@ -96,3 +98,11 @@ stopper.onclick = function() {
         worker = null;
     }
 }
+
+var simpleCreator = document.getElementById("simpleButton");
+var conditionalCreator = document.getElementById("conditionalButton");
+var inputCreator = document.getElementById("inputButton");
+
+simpleCreator.onclick = function() {addBox("s");};
+conditionalCreator.onclick = function() {addBox("c");};
+inputCreator.onclick = function() {addBox("i");};

@@ -1,0 +1,88 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+textarea {
+    resize: none;
+}
+#textbox {
+    width: calc(100vw - 30px);
+    height: calc(25vh - 30px);
+    transform: translate(15px, 15px);
+}
+
+#console {
+    background-color: black;
+    width: 100vw;
+    height: 20vh;
+    position: fixed;
+    transform: translate(0, 80vh);
+}
+
+#mainButtonsDiv {
+    position:fixed;
+    min-width: 320px;
+    background-color: black;
+    width: 100vw;
+    height: 40px;
+}
+
+.mainButtons {
+    background-color: black;
+    border: none;
+    color: white;
+    font-size: 20px;
+    width: 80px;
+    height: 40px;
+    float: left;
+}
+
+.mainButtons:hover {
+    background-color: white;
+    color: black;
+}
+#buttonPanel {
+    position: fixed;
+    height: calc(80vh - 40px);
+    width: 160px;
+    min-width: 160px;
+    transform: translate(0, 40px);
+    background-color: lightgrey;
+}
+
+#buttonPanelTitle {
+    height: 60px;
+    width: 160px;
+    background-color: lightgrey;
+    color: black;
+    border: none;
+    border-left: 10px solid lightgrey;
+    font-size: 20px;
+    text-align: left;
+    font-weight: bold;
+}
+
+.boxButtons {
+    background-color: lightgrey;
+    border: none;
+    border-left: 10px solid lightgrey;
+    color: black;
+    font-size: 20px;
+    width: 160px;
+    height: 40px;
+    text-align: left;
+}
+
+.boxButtons:hover {
+    background-color: black;
+    color: white;
+    border-left: 10px solid black;
+}
+
+#codeArea {
+    position: fixed;
+    width: calc(100vw - 160px);
+    height: calc(80vh - 40px);
+    transform: translate(160px, 40px);
+    overflow-y: scroll;
+}

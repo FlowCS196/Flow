@@ -1,3 +1,4 @@
+var space = document.getElementById("codeArea");
 var codeBoxArr = [];
 /**
  * Creates a div that has a textarea as a child. These will be the diagram boxes that you can drag around and fill with code.
@@ -31,7 +32,7 @@ function addBox(type) {
 
         codeBox[0].appendChild(codeBox[1]);
 
-        document.body.appendChild(codeBox[0]);
+        space.appendChild(codeBox[0]);
         codeBoxArr.push(codeBox);
     }
     for (let i = 0; i < codeBoxArr.length; ++i) {
@@ -48,7 +49,7 @@ function addBox(type) {
  * @param {*} index is the ID of the box your are deleting.
  */
 function removeBox(index) {
-    document.body.removeChild(codeBoxArr[parseInt(index)][0]);
+    space.removeChild(codeBoxArr[parseInt(index)][0]);
     primaryUnconnectStart(index);
     secondaryUnconnectStart(index);
     unconnectEnd(index);

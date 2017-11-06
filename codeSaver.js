@@ -21,7 +21,7 @@ loadButton.onclick = function () {
 			while (myDiv.firstChild) {
 				myDiv.removeChild(myDiv.firstChild);
 			}
-			document.body.removeChild(myDiv);
+			space.removeChild(myDiv);
 		}
 	}
 	codeBoxArr = JSON.parse(stringArr);
@@ -38,7 +38,7 @@ loadButton.onclick = function () {
 		codeBoxArr[i][1].value = codeBoxArr[i][8];
 			
 		codeBoxArr[i][0].appendChild(codeBoxArr[i][1]);
-		document.body.appendChild(codeBoxArr[i][0]);
+		space.appendChild(codeBoxArr[i][0]);
 
 		if (codeBoxArr[i][3] === null) {
 			codeBoxArr[i][3] = undefined;
