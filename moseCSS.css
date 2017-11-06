@@ -95,3 +95,59 @@ body {
     transform: translate(160px, 40px);
     overflow-y: scroll;
 }
+
+.s_code {
+    border:none;
+    width: 144px;
+    height: 44px;
+    transform: translate(8px, 8px);
+}
+
+.s_box {
+    position: absolute;
+    background-color: black;
+    height: 60px;
+    width: 160px;
+}
+
+.c_code {
+    border:none;
+    width: 144px;
+    height: 44px;
+    transform: translate(8px, 8px);
+}
+
+.c_box {
+    position: absolute;
+    background-color: black;
+    height: 60px;
+    width: 160px;
+}
+
+.f_code {
+    border:none;
+    width: 144px;
+    height: 44px;
+    transform: translate(8px, 8px);
+}
+
+.f_box {
+    position: absolute;
+    background-color: black;
+    height: 60px;
+    width: 160px;
+}
+
+.i_code {
+    border:none;
+    width: 144px;
+    height: 44px;
+    transform: translate(8px, 8px);
+}
+
+.i_box {
+    position: absolute;
+    background-color: black;
+    height: 60px;
+    width: 160px;
+}

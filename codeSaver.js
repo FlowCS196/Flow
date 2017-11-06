@@ -1,15 +1,23 @@
 var saveButton = document.getElementById("saveButton");
 saveButton.onclick = function () {
+	let fileName = prompt("File Name?");
+	if (fileName == null) {
+		return;
+	}
 	for (let i = 0; i < codeBoxArr.length; ++i) {
 		codeBoxArr[i][8] = codeBoxArr[i][1].value
+		codeBoxArr[i][6] = codeBoxArr[i][0].style.left;
+		codeBoxArr[i][7] = codeBoxArr[i][0].style.top;
 	}
-	let fileName = prompt("File Name?");
 	localStorage.setItem(fileName, JSON.stringify(codeBoxArr));
 };
 
 var loadButton = document.getElementById("loadButton");
 loadButton.onclick = function () {
 	let fileName = prompt("File Name?");
+	if (fileName == null) {
+		return;
+	}
 	let stringArr = localStorage.getItem(fileName);
 	if (stringArr === null) {
 		alert("No such file exists. Did you type correctly?");
@@ -33,12 +41,18 @@ loadButton.onclick = function () {
 
 		codeBoxArr[i][0].id = "" + i;
 		codeBoxArr[i][0].className = codeBoxArr[i][2] + "_box";
+
+		makeDraggable(codeBoxArr[i][0]);
+
 		codeBoxArr[i][1].className = codeBoxArr[i][2] + "_code";
 
 		codeBoxArr[i][1].value = codeBoxArr[i][8];
 			
 		codeBoxArr[i][0].appendChild(codeBoxArr[i][1]);
 		space.appendChild(codeBoxArr[i][0]);
+
+		codeBoxArr[i][0].style.left = codeBoxArr[i][6];
+		codeBoxArr[i][0].style.top = codeBoxArr[i][7];
 
 		if (codeBoxArr[i][3] === null) {
 			codeBoxArr[i][3] = undefined;

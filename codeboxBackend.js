@@ -17,13 +17,15 @@ function addBox(type) {
         an array of indices that hold all the boxes that have connections to this box, an x-coordinate, a y-coordinate, and a string that keeps the code of the box inside after saving.*/
 
         //TODO: The x and y coordinates don't get changed when the div moves. They should get changed, so that loading works appropriately.
-        var codeBox = [document.createElement("div"), document.createElement("textarea"), type, undefined, undefined, [], 0, 0, ""];
+        var codeBox = [document.createElement("div"), document.createElement("textarea"), type, undefined, undefined, [], "", "", ""];
 
         //Give an id to the box.
         codeBox[0].id = "" + codeBoxArr.length;
 
         //Give a class name to the box so that we can stylize the boxes in CSS. The names are in the format type_box, where type can be f, s, i, c, or e
         codeBox[0].className = type + "_box";
+
+        makeDraggable(codeBox[0]);
 
         //Give a class name to the textarea that is the child of the box. The names are in the format type_code.
         codeBox[1].className = type + "_code";
@@ -34,6 +36,7 @@ function addBox(type) {
 
         space.appendChild(codeBox[0]);
         codeBoxArr.push(codeBox);
+
     }
     for (let i = 0; i < codeBoxArr.length; ++i) {
         if (codeBoxArr[i] == null) {
