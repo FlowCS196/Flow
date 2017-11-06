@@ -14,7 +14,6 @@ function mouseDown(box) {
     currentlyDragged = box;
     offsetX = -mouseX + parseInt("0" + box.style.left.substring(0, box.style.left.length - 2));
     offsetY = -mouseY + parseInt("0" + box.style.top.substring(0, box.style.top.length - 2));
-    console.log(offsetX);
 }
 
 function mouseUp(e) {
