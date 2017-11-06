@@ -94,6 +94,7 @@ body {
     height: calc(80vh - 40px);
     transform: translate(160px, 40px);
     overflow-y: scroll;
+    overflow-x: scroll;
 }
 
 .s_code {
