@@ -5,9 +5,13 @@
 textarea {
     resize: none;
 }
+
+button:focus {
+    outline:0;
+}
 #textbox {
     width: calc(100vw - 30px);
-    height: calc(25vh - 30px);
+    height: calc(20vh - 30px);
     transform: translate(15px, 15px);
 }
 
