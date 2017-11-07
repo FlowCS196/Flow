@@ -14,6 +14,7 @@ body {
     background-color: black;
 }
 #textbox {
+    border: none;
     width: calc(100vw - 30px);
     height: calc(20vh - 30px);
     transform: translate(15px, 15px);
