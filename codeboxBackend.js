@@ -57,9 +57,8 @@ function addBox(type) {
  */
 function removeBox(index) {
     let num = parseInt(index);
+    //Don't delete first boxes!
     if (codeBoxArr[num][2] == 'f') {
-        codeBoxArr[num][0].style.left = "0px";
-        codeBoxArr[num][0].style.top = "0px";
         return;
     }
     space.removeChild(codeBoxArr[num][0]);

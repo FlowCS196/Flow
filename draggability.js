@@ -1,10 +1,18 @@
-var currentlyDragged = null;;
+var codeArea = document.getElementById("codeArea");
+var scrollElement = document.getElementById("scrollElement");
+var currentlyDragged = null;
 var mouseX = 0;
 var mouseY = 0;
 var offsetX = 0;
 var offsetY = 0;
+var currentlyScrolling = false;
+var scrollStartX = 0;
+var scrollStartY = 0;
+
 window.addEventListener("mouseup", mouseUp, false);
-window.addEventListener("mousemove", moveBox, false);
+window.addEventListener("mousemove", moveStuff, false);
+window.addEventListener("keydown", deleteBox, false);
+codeArea.addEventListener("mousedown", startScrolling, false);
 
 function makeDraggable(box) {
     box.addEventListener("mousedown", function () {return mouseDown(box);}, false);
@@ -16,27 +24,67 @@ function makeDraggable(box) {
     }
 }
 
+function deleteBox(e) {
+    if (e.keyCode == 8) { //backspace
+        if (currentlyDragged) {
+            removeBox(currentlyDragged.id);
+        }
+    }
+}
+
+function startScrolling(e) {
+    if (!currentlyDragged) {
+        currentlyScrolling = true;
+        scrollStartX = mouseX;
+        scrollStartY = mouseY;
+    }
+}
+
+
 function mouseDown(box) {
     currentlyDragged = box;
-    offsetX = -mouseX + parseInt(box.style.left.substring(0, box.style.left.length - 2));
-    offsetY = -mouseY + parseInt(box.style.top.substring(0, box.style.top.length - 2));
+    offsetX = -mouseX + parseFloat(box.style.left.substring(0, box.style.left.length - 2));
+    offsetY = -mouseY + parseFloat(box.style.top.substring(0, box.style.top.length - 2));
 }
 
 function mouseUp(e) {
     if (currentlyDragged == null) {
+        currentlyScrolling = false;
         return;
     }
-    if (parseInt(currentlyDragged.style.left.substring(0, currentlyDragged.style.left.length-2)) < -80 || parseInt(currentlyDragged.style.top.substring(0, currentlyDragged.style.top.length-2)) < -30) {
-        removeBox(currentlyDragged.id);
+    let left = parseFloat(currentlyDragged.style.left.substring(0, currentlyDragged.style.left.length-2));
+    let top = parseFloat(currentlyDragged.style.top.substring(0, currentlyDragged.style.top.length-2));
+    let boxWidth = currentlyDragged.offsetWidth;
+    let boxHeight = currentlyDragged.offsetHeight;
+    let areaWidth = codeArea.offsetWidth;
+    let areaHeight = codeArea.offsetHeight;
+
+    if (left < codeArea.scrollLeft) {
+        currentlyDragged.style.left = codeArea.scrollLeft + "px";
+    }
+    if (top < codeArea.scrollTop) {
+        currentlyDragged.style.top = codeArea.scrollTop + "px";
+    }
+    if (left + boxWidth > areaWidth + codeArea.scrollLeft) {
+        currentlyDragged.style.left = areaWidth + codeArea.scrollLeft - boxWidth + "px";
+    }
+    if (top + boxHeight > areaHeight + codeArea.scrollTop) {
+        currentlyDragged.style.top = areaHeight + codeArea.scrollTop - boxHeight + "px";
     }
     currentlyDragged = null;
 }
 
-function moveBox(e) {
+function moveStuff(e) {
     mouseX = e.pageX;
     mouseY = e.pageY;
     if (currentlyDragged) {
         currentlyDragged.style.top = mouseY + offsetY + "px";
         currentlyDragged.style.left = mouseX + offsetX + "px";
+    } else if (currentlyScrolling) {
+        scrollElement.style.width = codeArea.scrollLeft + codeArea.offsetWidth + window.innerWidth + "px";
+        scrollElement.style.height = codeArea.scrollTop + codeArea.offsetHeight + window.innerWidth + "px";
+        codeArea.scrollBy(mouseX - scrollStartX, mouseY - scrollStartY);
+        scrollStartX = mouseX;
+        scrollStartY = mouseY;
     }
 }
