@@ -37,8 +37,13 @@ function addBox(type) {
         }
 
         codeBox[0].appendChild(codeBox[1]);
+        codeBox[0].style.left = space.scrollLeft + "px";
+        codeBox[0].style.top = space.scrollTop + "px";
 
         space.appendChild(codeBox[0]);
+
+
+
         codeBoxArr.push(codeBox);
 
     }
