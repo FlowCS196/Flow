@@ -108,6 +108,7 @@ body {
     width: 144px;
     height: 44px;
     transform: translate(8px, 8px);
+    background-color: #90EE90;
 }
 
 .s_box {
@@ -122,6 +123,7 @@ body {
     width: 144px;
     height: 44px;
     transform: translate(8px, 8px);
+    background-color: #FAFAD2;
 }
 
 .c_box {
@@ -136,6 +138,7 @@ body {
     width: 144px;
     height: 44px;
     transform: translate(8px, 8px);
+    background-color: #F08080;
 }
 
 .f_box {
@@ -150,6 +153,7 @@ body {
     width: 144px;
     height: 44px;
     transform: translate(8px, 8px);
+    background-color: #00BFFF;
 }
 
 .i_box {
