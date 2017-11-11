@@ -108,12 +108,12 @@ body {
     width: 144px;
     height: 44px;
     transform: translate(8px, 8px);
-    background-color: #90EE90;
+    background-color: #90EE90; /*GREEN*/
 }
 
 .s_box {
     position: absolute;
-    background-color: black;
+    background-color: #3CB371; /*GREEN*/
     height: 60px;
     width: 160px;
 }
@@ -123,27 +123,27 @@ body {
     width: 144px;
     height: 44px;
     transform: translate(8px, 8px);
-    background-color: #FAFAD2;
+    background-color: #FAFAD2; /*YELLOW*/
 }
 
 .c_box {
     position: absolute;
-    background-color: black;
+    background-color: #F5DEB3; /*YELLOW*/
     height: 60px;
     width: 160px;
 }
 
-.f_code {
+.f_code { 
     border:none;
     width: 144px;
     height: 44px;
     transform: translate(8px, 8px);
-    background-color: #F08080;
+    background-color: #F08080; /*RED*/
 }
 
 .f_box {
     position: absolute;
-    background-color: black;
+    background-color: #8B0000; /*RED*/
     height: 60px;
     width: 160px;
 }
@@ -153,12 +153,12 @@ body {
     width: 144px;
     height: 44px;
     transform: translate(8px, 8px);
-    background-color: #00BFFF;
+    background-color: #00BFFF; /*BLUE*/
 }
 
 .i_box {
     position: absolute;
-    background-color: black;
+    background-color: #4682B4; /*BLUE*/
     height: 60px;
     width: 160px;
 }
