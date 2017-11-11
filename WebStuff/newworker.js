@@ -32,7 +32,22 @@ const complexEvaluator = (words) => {
 		eval(words[1]);
 		return words[2];
 	} else if (words[0] == 'c') {
-		return (eval(words[1])) ? words[2] : words[3];
+		let truth = eval(words[1]);
+		if (truth) {
+			if (words[2]) {
+				return words[2];
+			} else {
+				closer("");
+				return -1;
+			}
+		} else {
+			if (words[2]) {
+				return words[2];
+			} else {
+				closer("");
+				return -1;
+			}
+		}
 	} else if (words[0] == 'i') {
 		inputter(words[1], words[2]);
 		return -1;

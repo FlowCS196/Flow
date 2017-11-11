@@ -129,8 +129,9 @@ body {
 .c_box {
     position: absolute;
     background-color: #F5DEB3; /*YELLOW*/
-    height: 60px;
-    width: 160px;
+    height: 100px;
+    width: 100px;
+    transform: rotate(45deg);
 }
 
 .f_code { 
@@ -150,15 +151,17 @@ body {
 
 .i_code {
     border:none;
-    width: 144px;
-    height: 44px;
-    transform: translate(8px, 8px);
-    background-color: #00BFFF; /*BLUE*/
+    width: 101.82px; /* 72√2 */
+    height: 31.11px; /* 36√2 */
+    transform: translate(21.09px, 6.445px); /* Centering */
+    background-color: #00BFFF;
 }
 
 .i_box {
     position: absolute;
-    background-color: #4682B4; /*BLUE*/
-    height: 60px;
-    width: 160px;
+    border-radius: 50%;
+    background-color: #00BFFF;
+    border: 8px solid #4682B4; /*BLUE*/
+    height: 44px;
+    width: 144px;
 }
