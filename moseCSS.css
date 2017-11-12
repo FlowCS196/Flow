@@ -120,17 +120,19 @@ body {
 
 .c_code {
     border:none;
-    width: 144px;
-    height: 44px;
+    width: 80px;
+    height: 80px;
     transform: translate(8px, 8px);
     background-color: #FAFAD2; /*YELLOW*/
+    transform: rotate(-45deg);
+    transform-origin: 90% 30%;
 }
 
 .c_box {
     position: absolute;
     background-color: #F5DEB3; /*YELLOW*/
-    height: 100px;
-    width: 100px;
+    height: 120px;
+    width: 120px;
     transform: rotate(45deg);
 }
 
@@ -140,13 +142,20 @@ body {
     height: 44px;
     transform: translate(8px, 8px);
     background-color: #F08080; /*RED*/
+    -webkit-transform: skew(-20deg);
+       -moz-transform: skew(-20deg);
+         -o-transform: skew(-20deg);
+    transform-origin: 0 100%
 }
 
 .f_box {
     position: absolute;
     background-color: #8B0000; /*RED*/
-    height: 60px;
-    width: 160px;
+    height: 45px;
+    width: 165px;
+    -webkit-transform: skew(20deg);
+       -moz-transform: skew(20deg);
+         -o-transform: skew(20deg);
 }
 
 .i_code {
