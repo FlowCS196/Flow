@@ -137,9 +137,9 @@ function codeMaker() {
     for (let i = 0; i < start; ++i) {
         let tmp = codeBoxArr[i];
         let line = [tmp[2], tmp[1].value];
-        if (tmp[3] != undefined) {
+        if (tmp[3] !== undefined) {
             line.push(tmp[3]);
-            if (tmp[4] != undefined) {
+            if (tmp[4] !== undefined) {
                 line.push(tmp[4]);
             }
         } else {
@@ -150,9 +150,9 @@ function codeMaker() {
     for (let i = start + 1; i < codeBoxArr.length; ++i) {
         let tmp = codeBoxArr[i];
         let line = [tmp[2], tmp[1].value];
-        if (tmp[3] != undefined) {
+        if (tmp[3] !== undefined) {
             line.push(tmp[3]);
-            if (tmp[4] != undefined) {
+            if (tmp[4] !== undefined) {
                 line.push(tmp[4]);
             }
         } else {
