@@ -119,20 +119,22 @@ body {
 }
 
 .c_code {
-    border:none;
-    width: 80px;
-    height: 80px;
-    transform: translate(8px, 8px);
+    border: none;
+    width: 73.54px;
+    height: 73.54px;
+    transform: rotate(-45deg) translate(0px, 21.770px); /* -15 + 26√2 */
+    /*transform: translate(8px, 8px);*/
     background-color: #FAFAD2; /*YELLOW*/
-    transform: rotate(-45deg);
-    transform-origin: 90% 30%;
+    /*transform: rotate(-45deg);*/
+    /*transform-origin: 90% 30%;*/
 }
 
 .c_box {
     position: absolute;
-    background-color: #F5DEB3; /*YELLOW*/
-    height: 120px;
-    width: 120px;
+    background-color: #FAFAD2; /*YELLOW*/
+    height: 104px;
+    width: 104px;
+    border: 8px solid #F5DEB3;
     transform: rotate(45deg);
 }
 
@@ -140,29 +142,32 @@ body {
     border:none;
     width: 144px;
     height: 44px;
-    transform: translate(8px, 8px);
+    transform: skew(20deg) translate(8px, 0px);
     background-color: #F08080; /*RED*/
-    -webkit-transform: skew(-20deg);
-       -moz-transform: skew(-20deg);
-         -o-transform: skew(-20deg);
-    transform-origin: 0 100%
+    /*-webkit-transform: skew(20deg);
+       -moz-transform: skew(20deg);
+         -o-transform: skew(20deg);
+    */
 }
 
 .f_box {
     position: absolute;
-    background-color: #8B0000; /*RED*/
-    height: 45px;
-    width: 165px;
-    -webkit-transform: skew(20deg);
-       -moz-transform: skew(20deg);
-         -o-transform: skew(20deg);
+    background-color: #F08080; /*RED*/
+    height: 44px;
+    width: 160px;
+    border: 8px solid #8B0000;
+    transform: skew(-20deg);
+    /*-webkit-transform: skew(-20deg);
+       -moz-transform: skew(-20deg);
+         -o-transform: skew(-20deg);
+    */
 }
 
 .i_code {
     border:none;
-    width: 101.82px; /* 72√2 */
-    height: 31.11px; /* 36√2 */
-    transform: translate(21.09px, 6.445px); /* Centering */
+    width: 107.48px; /* 78√2 */
+    height: 39.6px; /* 28√2 */
+    transform: translate(22.846px, 8.201px); /* Centering */
     background-color: #00BFFF;
 }
 
@@ -171,6 +176,6 @@ body {
     border-radius: 50%;
     background-color: #00BFFF;
     border: 8px solid #4682B4; /*BLUE*/
-    height: 44px;
-    width: 144px;
+    height: 56px;
+    width: 156px;
 }
