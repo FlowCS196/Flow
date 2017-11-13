@@ -81,9 +81,6 @@ runner.onclick = function() {
         } else if (event.data[0] == 'i') {
             worker.postMessage(['i', event.data[1], event.data[2] + "=" + prompt("Enter Input", "0") + ";"]);
         } else if (event.data[0] == 'e') {
-            if (event.data[1].length > 1) {
-                box.value += event.data[1] + '\n';
-            }
             worker.terminate();
             worker = null;
         }

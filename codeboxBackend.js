@@ -136,27 +136,29 @@ function codeMaker() {
     }
     for (let i = 0; i < start; ++i) {
         let tmp = codeBoxArr[i];
-        let line = [tmp[2], tmp[1].value];
-        if (tmp[3] !== undefined) {
-            line.push(tmp[3]);
-            if (tmp[4] !== undefined) {
-                line.push(tmp[4]);
-            }
-        } else {
-            line[0] = 'e';
+        let line = [tmp[2], tmp[1].value, -1, -1];
+        if (tmp[3] != undefined) {
+            line[2] = tmp[3];
+        }
+        if (tmp[4] != undefined) {
+            line[3] = tmp[4];
+        }
+        if (line[0] != 'c' && line[2] == -1) {
+            line = ['e', line[1]];
         }
         code.push(line);
     }
     for (let i = start + 1; i < codeBoxArr.length; ++i) {
         let tmp = codeBoxArr[i];
         let line = [tmp[2], tmp[1].value];
-        if (tmp[3] !== undefined) {
-            line.push(tmp[3]);
-            if (tmp[4] !== undefined) {
-                line.push(tmp[4]);
-            }
-        } else {
-            line[0] = 'e';
+        if (tmp[3] != undefined) {
+            line[2] = tmp[3];
+        }
+        if (tmp[4] != undefined) {
+            line[3] = tmp[4];
+        }
+        if (line[0] != 'c' && line[2] == -1) {
+            line = ['e', line[1]];
         }
         code.push(line);
     }

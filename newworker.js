@@ -1,5 +1,5 @@
-const closer = (word) => {
-	this.postMessage(['e', word])
+const closer = () => {
+	this.postMessage(['e']);
 }
 
 const printer = (word) => {
@@ -34,12 +34,16 @@ const complexEvaluator = (words) => {
 	} else if (words[0] == 'c') {
 		let truth = eval(words[1]);
 		if (truth) {
-			return words[2];
+			if (words[2] !== undefined) {
+				return words[2];
+			}
+			closer();
+			return -1;
 		} else {
 			if (words[3] !== undefined) {
 				return words[3];
 			}
-			closer("");
+			closer();
 			return -1;
 		}
 	} else if (words[0] == 'i') {
@@ -47,7 +51,7 @@ const complexEvaluator = (words) => {
 		return -1;
 	} else if (words[0] == 'e') {
 		eval(words[1]);
-		closer("");
+		closer();
 		return -1;
 	}
 }
