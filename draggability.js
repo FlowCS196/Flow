@@ -84,8 +84,8 @@ function moveStuff(e) {
         currentlyDragged.style.top = mouseY + offsetY + "px";
         currentlyDragged.style.left = mouseX + offsetX + "px";
     } else if (currentlyScrolling) {
-        scrollElement.style.width = codeArea.scrollLeft + codeArea.offsetWidth + window.innerWidth + "px";
-        scrollElement.style.height = codeArea.scrollTop + codeArea.offsetHeight + window.innerWidth + "px";
+        scrollElement.style.width = Math.max(codeArea.scrollLeft + codeArea.offsetWidth, codeArea.scrollLeft + codeArea.offsetWidth + mouseX - scrollStartX) + "px";
+        scrollElement.style.height = Math.max(codeArea.scrollTop + codeArea.offsetHeight,  + codeArea.scrollTop + codeArea.offsetHeight + mouseY - scrollStartY) + "px";
         codeArea.scrollBy(mouseX - scrollStartX, mouseY - scrollStartY);
         scrollStartX = mouseX;
         scrollStartY = mouseY;
