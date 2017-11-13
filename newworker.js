@@ -34,13 +34,13 @@ const complexEvaluator = (words) => {
 	} else if (words[0] == 'c') {
 		let truth = eval(words[1]);
 		if (truth) {
-			if (words[2] !== undefined) {
+			if (words[2] != -1) {
 				return words[2];
 			}
 			closer();
 			return -1;
 		} else {
-			if (words[3] !== undefined) {
+			if (words[3] != -1) {
 				return words[3];
 			}
 			closer();
