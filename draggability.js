@@ -26,7 +26,7 @@ function makeDraggable(box) {
 
 function deleteBox(e) {
     if (e.keyCode == 8) { //backspace
-        if (document.activeElement.tagName != "textarea") {
+        if (document.activeElement.tagName != "TEXTAREA") {
             e.preventDefault();
         }
         if (currentlyDragged) {
