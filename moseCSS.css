@@ -164,9 +164,9 @@ body {
 
 .i_code {
     border:none;
-    width: 110.309px; /* 78√2 */
-    height: 39.598px; /* 28√2 */
-    transform: translate(22.846px, 8.201px); /* Centering */
+    width: 110.309px; /* 80√2 */
+    height: 42.426px; /* 30√2 */
+    transform: translate(23.431px, 8.787px); /* 80 - 40√2, 30 - 15√2 */
     background-color: #00BFFF;
 }
 
@@ -175,6 +175,6 @@ body {
     border-radius: 50%;
     background-color: #00BFFF;
     border: 8px solid #4682B4; /*BLUE*/
-    height: 56px;
-    width: 156px;
+    height: 60px;
+    width: 160px;
 }
