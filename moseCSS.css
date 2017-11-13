@@ -140,7 +140,7 @@ body {
 
 .f_code { 
     border:none;
-    width: 144px;
+    width: 128px;
     height: 44px;
     transform: skew(20deg) translate(8px, 0px);
     background-color: #F08080; /*RED*/
@@ -154,7 +154,7 @@ body {
     position: absolute;
     background-color: #F08080; /*RED*/
     height: 44px;
-    width: 160px;
+    width: 144px;
     border: 8px solid #8B0000;
     transform: skew(-20deg);
     /*-webkit-transform: skew(-20deg);
