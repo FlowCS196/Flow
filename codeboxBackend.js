@@ -17,10 +17,17 @@ function addBox(type) {
         an array of indices that hold all the boxes that have connections to this box, an x-coordinate, a y-coordinate, and a string that keeps the code of the box inside after saving.*/
 
         //TODO: The x and y coordinates don't get changed when the div moves. They should get changed, so that loading works appropriately.
-        var codeBox = [document.createElement("div"), document.createElement("textarea"), type, undefined, undefined, [], "", "", ""];
+        var codeBox = [document.createElement("div"), document.createElement("textarea"), type, -1, -1, [], "", "", ""];
 
         //Give an id to the box.
-        codeBox[0].id = "" + codeBoxArr.length;
+        var position
+        for (position = 0; position < codeBoxArr.length; ++position) {
+            if (codeBoxArr[position] == null) {
+                break;
+            }
+        }
+
+        codeBox[0].id = "" + position;
 
         //Give a class name to the box so that we can stylize the boxes in CSS. The names are in the format type_box, where type can be f, s, i, c, or e
         codeBox[0].className = type + "_box";
@@ -42,9 +49,11 @@ function addBox(type) {
 
         space.appendChild(codeBox[0]);
 
-
-
-        codeBoxArr.push(codeBox);
+        if (position == codeBoxArr.length) {
+            codeBoxArr.push(codeBox);
+        } else {
+            codeBoxArr[position] = codeBox;
+        }
 
     }
     for (let i = 0; i < codeBoxArr.length; ++i) {
@@ -94,10 +103,10 @@ function secondaryConnect(startIndex, endIndex) {
 function primaryUnconnectStart(startIndex) {
     let start = parseInt(startIndex);
     let end = codeBoxArr[start][3];
-    if (end == undefined) {
+    if (end == -1) {
         return;
     }
-    codeBoxArr[start][3] = undefined;
+    codeBoxArr[start][3] = -1
     codeBoxArr[end][5] = codeBoxArr[end][5].filter(num => num != start);
 }
 
@@ -105,10 +114,10 @@ function primaryUnconnectStart(startIndex) {
 function secondaryUnconnectStart(startIndex) {
     let start = parseInt(startIndex);
     let end = codeBoxArr[start][4];
-    if (end == undefined) {
+    if (end == -1) {
         return;
     }
-    codeBoxArr[start][4] = undefined;
+    codeBoxArr[start][4] = -1;
     codeBoxArr[end][5] = codeBoxArr[end][5].filter(num => num != start);
 }
 
@@ -136,13 +145,8 @@ function codeMaker() {
     }
     for (let i = 0; i < start; ++i) {
         let tmp = codeBoxArr[i];
-        let line = [tmp[2], tmp[1].value, -1, -1];
-        if (tmp[3] != undefined) {
-            line[2] = tmp[3];
-        }
-        if (tmp[4] != undefined) {
-            line[3] = tmp[4];
-        }
+        let line = [tmp[2], tmp[1].value, tmp[3], tmp[4]];
+
         if (line[0] != 'c' && line[2] == -1) {
             line = ['e', line[1]];
         }
@@ -150,13 +154,8 @@ function codeMaker() {
     }
     for (let i = start + 1; i < codeBoxArr.length; ++i) {
         let tmp = codeBoxArr[i];
-        let line = [tmp[2], tmp[1].value];
-        if (tmp[3] != undefined) {
-            line[2] = tmp[3];
-        }
-        if (tmp[4] != undefined) {
-            line[3] = tmp[4];
-        }
+        let line = [tmp[2], tmp[1].value, tmp[3], tmp[4]];
+
         if (line[0] != 'c' && line[2] == -1) {
             line = ['e', line[1]];
         }

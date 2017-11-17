@@ -55,10 +55,10 @@ loadButton.onclick = function () {
 		codeBoxArr[i][0].style.top = codeBoxArr[i][7];
 
 		if (codeBoxArr[i][3] === null) {
-			codeBoxArr[i][3] = undefined;
+			codeBoxArr[i][3] = -1;
 		}
 		if (codeBoxArr[i][4] === null) {
-			codeBoxArr[i][4] = undefined;
+			codeBoxArr[i][4] = -1;
 		}
 	}
 };
