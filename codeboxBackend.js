@@ -73,13 +73,14 @@ function removeBox(index) {
     let num = parseInt(index);
     //Don't delete first boxes!
     if (codeBoxArr[num][2] == 'f') {
-        return;
+        return codeBoxArr[num][0];
     }
     space.removeChild(codeBoxArr[num][0]);
     primaryUnconnectStart(index);
     secondaryUnconnectStart(index);
     unconnectEnd(index);
     codeBoxArr[num] = null;
+    return null;
 }
 
 

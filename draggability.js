@@ -30,7 +30,7 @@ function deleteBox(e) {
             e.preventDefault();
         }
         if (currentlyDragged) {
-            removeBox(currentlyDragged.id);
+            currentlyDragged = removeBox(currentlyDragged.id);
         }
     }
 }
