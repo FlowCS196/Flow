@@ -47,17 +47,17 @@ primaryConnect('5', '3');*/
 
 addBox('f');
 /*
-addBox('s');
-addBox('s');
+addBox('i');
 addBox('c');
-addBox('e');
+addBox('s');
+addBox('s');
 
 primaryConnect('0','1');
 primaryConnect('1','2');
-primaryConnect('2', '3');
+primaryConnect('2','3');
+secondaryConnect('2','4');
 primaryConnect('3','4');
-secondaryConnect('3', '2');*/
-
+*/
 
 var box = document.getElementById('textbox');
 box.value = "";
