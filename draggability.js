@@ -15,7 +15,8 @@ window.addEventListener("keydown", deleteBox, false);
 codeArea.addEventListener("mousedown", startScrolling, false);
 
 function makeDraggable(box) {
-    box.addEventListener("mousedown", function () {return mouseDown(box);}, false);
+    box.addEventListener("mousedown", clickOnBox, false);
+    
     if (!box.style.left) {
         box.style.left = "0px";
     }
@@ -36,6 +37,9 @@ function deleteBox(e) {
 }
 
 function startScrolling(e) {
+    if (e.button == 2) { //right-click
+        return;
+    }
     if (!currentlyDragged) {
         currentlyScrolling = true;
         scrollStartX = mouseX;
@@ -43,8 +47,13 @@ function startScrolling(e) {
     }
 }
 
+function clickOnBox(e) {
+    if (e.button != 2) { //not right-click
+        startDragging(this);
+    }
+}
 
-function mouseDown(box) {
+function startDragging(box) {
     currentlyDragged = box;
     offsetX = -mouseX + parseFloat(box.style.left.substring(0, box.style.left.length - 2));
     offsetY = -mouseY + parseFloat(box.style.top.substring(0, box.style.top.length - 2));
