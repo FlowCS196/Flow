@@ -95,32 +95,15 @@ function mouseUp(e) {
         currentlyScrolling = false;
         return;
     }
-    
-    var rect = currentlyDragged.getBoundingClientRect();
-    console.log(rect);
-
-
     let offsets = offsetDict[currentlyDragged.className];
-
-
-
     let left = parseFloat(currentlyDragged.style.left.substring(0, currentlyDragged.style.left.length-2)) - offsets[3];
     let top = parseFloat(currentlyDragged.style.top.substring(0, currentlyDragged.style.top.length-2)) - offsets[0];
     let boxWidth = currentlyDragged.offsetWidth + offsets[3] - offsets[1];
     let boxHeight = currentlyDragged.offsetHeight + offsets[0] - offsets[2];
 
-    /*let left = rect.left - 160;
-    let top = rect.top - 40;
-    let boxWidth = rect.width;
-    let boxHeight = rect.height;
-    if (currentlyDragged.className == "c_box") {
-        top += 3.314; // 16/√2 - 8
-    }*/
-
     let areaWidth = codeArea.offsetWidth;
     let areaHeight = codeArea.offsetHeight;
 
-    
     if (left < codeArea.scrollLeft) {
         currentlyDragged.style.left = codeArea.scrollLeft + offsets[3] + "px";
     }
