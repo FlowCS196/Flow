@@ -109,15 +109,14 @@ body {
     border:none;
     width: 144px;
     height: 44px;
-    transform: translate(8px, 8px);
     background-color: #90EE90; /*GREEN*/
 }
 
 .s_box {
     position: absolute;
-    background-color: #3CB371; /*GREEN*/
-    height: 60px;
-    width: 160px;
+    height: 44px;
+    width: 144px;
+    border: 8px solid #3CB371;
 }
 
 .c_code {
@@ -180,3 +179,43 @@ body {
     height: 60px;
     width: 160px;
 }
+
+.connector_line {
+    position: absolute;
+    stroke: black;
+    stroke-width: 2px;
+}
+
+.connector_receiver {
+    position: absolute;
+    left: calc(50% - 8px);
+    top: -16px;
+    height: 12px;
+    width: 12px;
+    border: 2px solid black;
+    border-radius: 50%;
+    background-color: white;
+}
+
+.connector_primary {
+    position: absolute;
+    left: calc(50% - 8px);
+    top: 100%;
+    height: 12px;
+    width: 12px;
+    border: 2px solid black;
+    border-radius: 50%;
+    background-color: white;
+}
+
+.connector_secondary {
+    position: absolute;
+    left: calc(100% - 2.343px); /* 8 - 8/√2 */
+    top: -13.567px; /* 8 + 8/√2 */
+    height: 12px;
+    width: 12px;
+    border: 2px solid black;
+    border-radius: 50%;
+    background-color: white;
+}
+
