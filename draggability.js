@@ -50,8 +50,8 @@ function addConnectorNodes(box) {
 
 function makeDraggable(box) {
     box.addEventListener("mousedown", clickOnBox, false);
-    box.style.left = offsetDict[box.className][3] + "px";
-    box.style.top = offsetDict[box.className][0] + "px";
+    box.style.left = offsetDict[box.className][3] + codeArea.scrollLeft + "px";
+    box.style.top = offsetDict[box.className][0] + codeArea.scrollTop + "px";
     addConnectorNodes(box);
 }
 
