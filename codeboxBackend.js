@@ -16,7 +16,7 @@ function addBox(type) {
         /*codeBox contains: A div that contatins a textarea and can be dragged around, a textarea that is a child of the div, a type (f, s, i, c, or e), its primary connection, its secondary connection,
         an array of indices that hold all the boxes that have connections to this box, an x-coordinate, a y-coordinate, and a string that keeps the code of the box inside after saving.*/
 
-        var codeBox = [document.createElement("div"), document.createElement("textarea"), type, -1, -1, [], "", "", ""];
+        var codeBox = [document.createElement("div"), document.createElement("textarea"), type, -1, -1, "", "", ""];
 
         //Give an id to the box.
         var position
@@ -104,7 +104,6 @@ function primaryUnconnectStart(startIndex) {
         return;
     }
     codeBoxArr[start][3] = -1
-    codeBoxArr[end][5] = codeBoxArr[end][5].filter(num => num != start);
 }
 
 //You are removing the secondary connection from the box with ID startIndex. The endIndex is already known.
@@ -115,16 +114,11 @@ function secondaryUnconnectStart(startIndex) {
         return;
     }
     codeBoxArr[start][4] = -1;
-    codeBoxArr[end][5] = codeBoxArr[end][5].filter(num => num != start);
 }
 
 //You are removing all the connections that lead to the box with ID endIndex. The list of boxes that lead to it is already known.
 function unconnectEnd(endIndex) {
-    let end = parseInt(endIndex);
-    for (let i = 0; i < codeBoxArr[end][5].length; ++i) {
-        primaryUnconnectStart("" + codeBoxArr[end][5][i]);
-    }
-    codeBoxArr[end][5] = [];
+    //WRITE AGAIN
 }
 
 

@@ -5,9 +5,9 @@ saveButton.onclick = function () {
 		return;
 	}
 	for (let i = 0; i < codeBoxArr.length; ++i) {
-		codeBoxArr[i][8] = codeBoxArr[i][1].value
-		codeBoxArr[i][6] = codeBoxArr[i][0].style.left;
-		codeBoxArr[i][7] = codeBoxArr[i][0].style.top;
+		codeBoxArr[i][7] = codeBoxArr[i][1].value
+		codeBoxArr[i][5] = codeBoxArr[i][0].style.left;
+		codeBoxArr[i][6] = codeBoxArr[i][0].style.top;
 	}
 	localStorage.setItem(fileName, JSON.stringify(codeBoxArr));
 };
