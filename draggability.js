@@ -168,6 +168,15 @@ function anchorLine(e) {
         orientLine(currentLine, posX, posY, currentLine.x2.baseVal.value, currentLine.y2.baseVal.value);
     }
     currentLine.className.baseVal = currentLine.originNode.className.substring(10); //No more receiver_line funkiness.
+    //We are going to set up primary/seconday connections.
+    let startID = currentLine.originNode.parentNode.id;
+    let endID = currentLine.receiverNode.parentNode.id;
+    if (currentLine.originNode.className == "connector_primary") {
+        primaryConnect(startID, endID);
+    }
+    else {
+        secondaryConnect(startID, endID);
+    }
     currentLine = null;
 }
 
@@ -193,8 +202,8 @@ function startDrawing(e) {
     } else {
         orientLine(newLine, posX, posY, posX + 4, posY);
     }
-    offsetX = -160;
-    offsetY = -40;
+    offsetX = -160 + codeArea.scrollLeft;
+    offsetY = -40 + codeArea.scrollTop;
     currentLine = newLine;
     lineCanvas.appendChild(newLine);
 }

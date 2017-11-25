@@ -85,7 +85,6 @@ function primaryConnect(startIndex, endIndex) {
     let start = parseInt(startIndex);
     let end = parseInt(endIndex);
     codeBoxArr[start][3] = parseInt(end);
-    codeBoxArr[end][5].push(start);
 }
 
 //You are setting a primary connection from the box with ID startIndex to the box with ID endIndex.
@@ -93,7 +92,6 @@ function secondaryConnect(startIndex, endIndex) {
     let start = parseInt(startIndex);
     let end = parseInt(endIndex);
     codeBoxArr[start][4] = parseInt(end);
-    codeBoxArr[end][5].push(start);
 }
 
 //You are removing the primary connection from the box with ID startIndex. The endIndex is already known.
