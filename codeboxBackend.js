@@ -16,7 +16,6 @@ function addBox(type) {
         /*codeBox contains: A div that contatins a textarea and can be dragged around, a textarea that is a child of the div, a type (f, s, i, c, or e), its primary connection, its secondary connection,
         an array of indices that hold all the boxes that have connections to this box, an x-coordinate, a y-coordinate, and a string that keeps the code of the box inside after saving.*/
 
-        //TODO: The x and y coordinates don't get changed when the div moves. They should get changed, so that loading works appropriately.
         var codeBox = [document.createElement("div"), document.createElement("textarea"), type, -1, -1, [], "", "", ""];
 
         //Give an id to the box.
@@ -29,7 +28,7 @@ function addBox(type) {
 
         codeBox[0].id = "" + position;
 
-        //Give a class name to the box so that we can stylize the boxes in CSS. The names are in the format type_box, where type can be f, s, i, c, or e
+        //Give a class name to the box so that we can stylize the boxes in CSS. The names are in the format type_box, where type can be f, s, i, c, or e.
         codeBox[0].className = type + "_box";
 
         makeDraggable(codeBox[0]);
@@ -132,27 +131,15 @@ function unconnectEnd(endIndex) {
 // Creates code out of the boxes, using the code inside their textareas and their connections.
 function codeMaker() {
     code = [];
-    var start;
-    for (let i = 0; i < codeBoxArr.length; ++i) {
-        if (codeBoxArr[i][2] == 'f') {
-            start = i;
-            let tmp = codeBoxArr[i];
-            code.push(['s', tmp[1].value, tmp[3]]);
-            break;
-        }
+    let tmp = codeBoxArr[0];
+    let line = ['s', tmp[1].value, tmp[3]];
+    if (line[2] == -1) {
+        line = ['e', line[1]];
     }
-    for (let i = 0; i < start; ++i) {
-        let tmp = codeBoxArr[i];
-        let line = [tmp[2], tmp[1].value, tmp[3], tmp[4]];
-
-        if (line[0] != 'c' && line[2] == -1) {
-            line = ['e', line[1]];
-        }
-        code.push(line);
-    }
-    for (let i = start + 1; i < codeBoxArr.length; ++i) {
-        let tmp = codeBoxArr[i];
-        let line = [tmp[2], tmp[1].value, tmp[3], tmp[4]];
+    code.push(line);
+    for (let i = 1; i < codeBoxArr.length; ++i) {
+        tmp = codeBoxArr[i];
+        line = [tmp[2], tmp[1].value, tmp[3], tmp[4]];
 
         if (line[0] != 'c' && line[2] == -1) {
             line = ['e', line[1]];
