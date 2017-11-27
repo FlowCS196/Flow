@@ -1,35 +1,36 @@
 var $ = {};
-const closer = () => {
+function closer() {
 	postMessage(['e']);
 }
 
-const printer = (word) => {
+function printer (word) {
 	postMessage(['p', word]);
 }
 
-const printerln = (word) => {
+function printerln (word) {
 	printer(word + '\n');
 }
 
-const cleaner = () => {
+function cleaner () {
 	postMessage(['c']);
 }
-$.inputter = (word, next) => {
-	postMessage(['i', next.toString(), word]);
-}
 
-const sleeper = (milliseconds) => {
-	// Right now, this function does busy waiting. TODO: Implement a better solution.
+function sleeper (milliseconds) {
+	//Right now, this function does busy waiting. Not optimal.
 	var start = new Date().getTime();
 	while ((new Date().getTime() - start) < milliseconds) {}
 }
 
+$.inputter = (word, next) => {
+	postMessage(['i', next.toString(), word]);
+}
+
 $.inputEvaluator = (word) => {
-	var worker = undefined;
-	function realEval($) {
+	function $($) {
 		eval($);
 	}
-	realEval.call(undefined, word);
+	$.call({}, word);
+	//this == {}, $ = word. This prevents global variable access.
 }
 
 $.complexEvaluator = (words) => {
@@ -75,18 +76,6 @@ $.creator = (rawFunctions) => {
 };
 
 $.functions = [];
-
-/*function functionize(phrase) {
-	if (phrase[0] == "s") {
-		return new Function(phrase[1] + "return " + phrase[2] + ";");
-	} else if (phrase[0] == 'c') {
-		return new Function("if (" + phrase[1] + ") return" + phrase[2] + "; return" + phrase[3] +";");
-	} else if (phrase[0] == 'i') {
-		return new Function("$.inputter(\"" + phrase[1] + "\"," + phrase[2] + "); return -1;");
-	} else if (phrase[0] == "e") {
-		return new Function("closer(\"\"); return -1;");
-	}
-}*/
 
 this.onmessage = function (event) {
 	if (event.data[0] == 'i') {
