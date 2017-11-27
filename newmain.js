@@ -65,9 +65,8 @@ var stopper = document.getElementById('stopButton');
 runner.onclick = function() {
     var funcs = codeMaker();
     //box.value = JSON.stringify(funcs);
-    box.value = "";
     if (worker != null) {
-        return;
+        worker.terminate();
     }
     worker = new Worker("newworker.js");
     worker.onmessage = function(event) {

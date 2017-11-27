@@ -1,9 +1,10 @@
+var $ = {};
 const closer = () => {
-	this.postMessage(['e']);
+	postMessage(['e']);
 }
 
 const printer = (word) => {
-	this.postMessage(['p', word]);
+	postMessage(['p', word]);
 }
 
 const printerln = (word) => {
@@ -11,10 +12,10 @@ const printerln = (word) => {
 }
 
 const cleaner = () => {
-	this.postMessage(['c']);
+	postMessage(['c']);
 }
-const inputter = (word, next) => {
-	this.postMessage(['i', next.toString(), word]);
+$.inputter = (word, next) => {
+	postMessage(['i', next.toString(), word]);
 }
 
 const sleeper = (milliseconds) => {
@@ -23,16 +24,20 @@ const sleeper = (milliseconds) => {
 	while ((new Date().getTime() - start) < milliseconds) {}
 }
 
-const inputEvaluator = (word) => {
-	eval(word);
+$.inputEvaluator = (word) => {
+	var worker = undefined;
+	function realEval($) {
+		eval($);
+	}
+	realEval.call(undefined, word);
 }
 
-const complexEvaluator = (words) => {
+$.complexEvaluator = (words) => {
 	if (words[0] == 's') {
-		eval(words[1]);
+		$.inputEvaluator(words[1]);
 		return words[2];
 	} else if (words[0] == 'c') {
-		let truth = eval(words[1]);
+		let truth = $.inputEvaluator(words[1]);
 		if (truth) {
 			if (words[2] != -1) {
 				return words[2];
@@ -47,30 +52,29 @@ const complexEvaluator = (words) => {
 			return -1;
 		}
 	} else if (words[0] == 'i') {
-		inputter(words[1], words[2]);
+		$.inputter(words[1], words[2]);
 		return -1;
 	} else if (words[0] == 'e') {
-		eval(words[1]);
+		$.inputEvaluator(words[1]);
 		closer();
 		return -1;
 	}
 }
 
-const run = (next, code) => {
-	inputEvaluator(code);
+$.run = (next, code) => {
+	$.inputEvaluator(code);
 	while (next >= 0) {
 		//printer(next)
-		next = complexEvaluator($functions[next]);
+		next = $.complexEvaluator($.functions[next]);
 	}
 }
-const creator = (rawFunctions) => {
+$.creator = (rawFunctions) => {
 	for (let i = 0; i < rawFunctions.length; ++i) {
-		$functions.push(rawFunctions[i]);
+		$.functions.push(rawFunctions[i]);
 	}
+};
 
-}
-
-const $functions = [];
+$.functions = [];
 
 /*function functionize(phrase) {
 	if (phrase[0] == "s") {
@@ -78,7 +82,7 @@ const $functions = [];
 	} else if (phrase[0] == 'c') {
 		return new Function("if (" + phrase[1] + ") return" + phrase[2] + "; return" + phrase[3] +";");
 	} else if (phrase[0] == 'i') {
-		return new Function("inputter(\"" + phrase[1] + "\"," + phrase[2] + "); return -1;");
+		return new Function("$.inputter(\"" + phrase[1] + "\"," + phrase[2] + "); return -1;");
 	} else if (phrase[0] == "e") {
 		return new Function("closer(\"\"); return -1;");
 	}
@@ -86,10 +90,10 @@ const $functions = [];
 
 this.onmessage = function (event) {
 	if (event.data[0] == 'i') {
-		run (event.data[1], event.data[2]);
+		$.run (event.data[1], event.data[2]);
 	} else {
-		creator(event.data);
-		run(0, "");
+		$.creator(event.data);
+		$.run(0, "");
 	}
 };
 
