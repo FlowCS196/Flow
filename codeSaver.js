@@ -57,8 +57,10 @@ loadButton.onclick = function () {
 		codeBoxArr[i][0].style.top = codeBoxArr[i][6];
 	}
 	var child;
+	nullIndexCount = 0;
 	for (let i = 0; i < codeBoxArr.length; ++i) {
 		if (codeBoxArr[i] === null) {
+			nullIndexCount += 1;
 			continue;
 		}
 		let myChildren = codeBoxArr[i][0].childNodes;
