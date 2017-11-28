@@ -44,22 +44,25 @@ function addConnectorNodes(box) {
         let connector_secondary = document.createElement("div");
         connector_secondary.className = "connector_secondary";
 
-        connector_secondary.addEventListener("mousedown", startDrawing, false);
+        connector_secondary.addEventListener("mousedown", clickOnConnector, false);
         connector_secondary.addEventListener("mouseup", anchorLine, false);
         connector_secondary.line = null; //The connector could carry a reference to a line.
         connector_secondary.lines = {}; //This will always remain empty.
+        connector_secondary.oncontextmenu = function() {return false;};
         box.appendChild(connector_secondary);
     }
 
-    connector_receiver.addEventListener("mousedown", startDrawing, false);
+    connector_receiver.addEventListener("mousedown", clickOnConnector, false);
     connector_receiver.addEventListener("mouseup", anchorLine, false);
     connector_receiver.lines = {}; //The connector could carry references to many lines.
     connector_receiver.line = null; //This will always remain null.
+    connector_receiver.oncontextmenu = function() {return false;};
     box.appendChild(connector_receiver);
-    connector_primary.addEventListener("mousedown", startDrawing, false);
+    connector_primary.addEventListener("mousedown", clickOnConnector, false);
     connector_primary.addEventListener("mouseup", anchorLine, false);
     connector_primary.line = null; //The connector could carry a reference to a line.
     connector_primary.lines = {}; //This will always remain empty.
+    connector_primary.oncontextmenu = function() {return false;};
     box.appendChild(connector_primary);
 }
 
@@ -76,7 +79,7 @@ function deleteBox(e) {
             e.preventDefault();
         }
         if (currentlyDragged) {
-            currentlyDragged = removeBox(currentlyDragged.id);
+            currentlyDragged = removeBox(currentlyDragged.id, false);
         }
     }
 }
@@ -89,6 +92,23 @@ function orientAnchoredLine(myLine) {
     let targetX = rect.left + rect.width / 2  - 160 + codeArea.scrollLeft;
     let targetY = rect.top + rect.height / 2 - 40 + codeArea.scrollTop;
     orientLine(myLine, originX, originY, targetX, targetY);
+}
+
+function loadLine(myLine, origin, target) {
+    myLine.originNode = origin;
+    myLine.receiverNode = target;
+    myLine.id = "l" + lineIDcounter;
+    lineIDcounter += 1; //Each line has a unique ID. This would take millenia to break.
+    origin.line = myLine;
+    target[myLine.id] = myLine;
+    let rect = origin.getBoundingClientRect();
+    let x1 = rect.left + rect.width / 2  - 160 + codeArea.scrollLeft;
+    let y1 = rect.top + rect.height / 2 - 40 + codeArea.scrollTop;
+    rect = target.getBoundingClientRect();
+    let x2 = rect.left + rect.width / 2  - 160 + codeArea.scrollLeft;
+    let y2 = rect.top + rect.height / 2 - 40 + codeArea.scrollTop;
+    orientLine(myLine, x1, y1, x2, y2);
+    lineCanvas.appendChild(myLine);
 }
 
 function orientLine(myLine, x1, y1, x2, y2) {
@@ -126,8 +146,13 @@ function orientLine(myLine, x1, y1, x2, y2) {
 }
 
 function destroyAnchoredLine(myLine) {
+    if (myLine.originNode.className == "connector_primary") {
+        primaryUnconnectStart(myLine.originNode.parentNode.id);
+    } else {
+        secondaryUnconnectStart(myLine.originNode.parentNode.id);
+    }
     myLine.originNode.line = null;
-    delete myLine.receiverNode.lines[myLine.id.baseVal];
+    delete myLine.receiverNode.lines[myLine.id];
     //The references to this line are being cleared.
     myLine.originNode = null;
     myLine.receiverNode = null;
@@ -180,19 +205,17 @@ function anchorLine(e) {
     currentLine = null;
 }
 
-function startDrawing(e) {
+function startDrawing(myConnector) {
     let newLine = document.createElementNS("http://www.w3.org/2000/svg", "line");
-    newLine.className.baseVal = this.className.substring(10) + "_line"; //receiver, primary, or secondary + _line, based on where we are starting from.
+    newLine.className.baseVal = myConnector.className.substring(10) + "_line"; //receiver, primary, or secondary + _line, based on where we are starting from.
     if (newLine.className.baseVal == "receiver_line") {
-        newLine.receiverNode = this;
+        newLine.receiverNode = myConnector;
         newLine.originNode = null;
     } else {
-        newLine.originNode = this;
+        newLine.originNode = myConnector;
         newLine.receiverNode = null;
     } //The line keeps a reference to this node.
-
-
-    let rect = this.getBoundingClientRect();
+    let rect = myConnector.getBoundingClientRect();
     let posX = rect.left + rect.width / 2  - 160 + codeArea.scrollLeft;
     let posY = rect.top + rect.height / 2 - 40 + codeArea.scrollTop;
     if (newLine.className.baseVal == "receiver_line") {
@@ -206,6 +229,21 @@ function startDrawing(e) {
     offsetY = -40 + codeArea.scrollTop;
     currentLine = newLine;
     lineCanvas.appendChild(newLine);
+}
+
+
+function clickOnConnector(e) {
+    if (e.button == 2) { //right-click
+        e.preventDefault();
+        if (this.line) {
+            destroyAnchoredLine(this.line);
+        }
+        for(var lineID in this.lines) {
+            destroyAnchoredLine(this.lines[lineID]);
+        }
+    } else {
+        startDrawing(this);
+    }
 }
 
 function startScrolling(e) {
@@ -266,7 +304,23 @@ function mouseUp(e) {
         currentlyDragged.style.top = areaHeight + codeArea.scrollTop - boxHeight + offsets[0] + "px";
     }
     currentlyDragged.style.zIndex = 0; //You aren't dragging the box anymore, no need to make it appear in front.
+    boxLineOrient(currentlyDragged);
     currentlyDragged = null;
+}
+
+function boxLineOrient(box) {
+    let children = box.childNodes;
+    for (let i = 0; i < children.length; ++i) {
+        child = children[i];
+        if (child.tagName != "TEXTAREA") {
+            if (child.line) {
+                orientAnchoredLine(child.line);
+            }
+            for (var lineID in child.lines) {
+                orientAnchoredLine(child.lines[lineID]);
+            }
+        }
+    }
 }
 
 function moveStuff(e) {
@@ -282,18 +336,7 @@ function moveStuff(e) {
     } else if (currentlyDragged) {
         currentlyDragged.style.top = mouseY + offsetY + "px";
         currentlyDragged.style.left = mouseX + offsetX + "px";
-        let children = currentlyDragged.childNodes;
-        for (let i = 0; i < children.length; ++i) {
-            child = children[i];
-            if (child.tagName != "TEXTAREA") {
-                if (child.line) {
-                    orientAnchoredLine(child.line);
-                }
-                for (var lineID in child.lines) {
-                    orientAnchoredLine(child.lines[lineID]);
-                }
-            }
-        }
+        boxLineOrient(currentlyDragged);
     } else if (currentlyScrolling) {
         scrollElement.style.width = Math.max(codeArea.scrollLeft + codeArea.offsetWidth, codeArea.scrollLeft + codeArea.offsetWidth + mouseX - scrollStartX) + "px";
         scrollElement.style.height = Math.max(codeArea.scrollTop + codeArea.offsetHeight,  + codeArea.scrollTop + codeArea.offsetHeight + mouseY - scrollStartY) + "px";

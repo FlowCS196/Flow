@@ -65,16 +65,25 @@ function addBox(type) {
  * Deletes a code diagram box that has been created before. It also removes all the connections this box has to others.
  * @param {*} index is the ID of the box your are deleting.
  */
-function removeBox(index) {
+function removeBox(index, override) {
     let num = parseInt(index);
-    //Don't delete first boxes!
-    if (codeBoxArr[num][2] == 'f') {
+    //Don't delete first boxes unless override is true.
+    if (codeBoxArr[num][2] == 'f' && !override) {
         return codeBoxArr[num][0];
     }
     space.removeChild(codeBoxArr[num][0]);
-    primaryUnconnectStart(index);
-    secondaryUnconnectStart(index);
-    unconnectEnd(index);
+    let children = codeBoxArr[num][0].childNodes;
+    for (let i = 0; i < children.length; ++i) {
+        child = children[i];
+        if (child.tagName != "TEXTAREA") {
+            if (child.line) {
+                destroyAnchoredLine(child.line);
+            }
+            for (var lineID in child.lines) {
+                destroyAnchoredLine(child.lines[lineID]);
+            }
+        }
+    }
     codeBoxArr[num] = null;
     return null;
 }
@@ -113,12 +122,6 @@ function secondaryUnconnectStart(startIndex) {
     }
     codeBoxArr[start][4] = -1;
 }
-
-//You are removing all the connections that lead to the box with ID endIndex. The list of boxes that lead to it is already known.
-function unconnectEnd(endIndex) {
-    //WRITE AGAIN
-}
-
 
 // Creates code out of the boxes, using the code inside their textareas and their connections.
 function codeMaker() {

@@ -27,9 +27,9 @@ $.inputter = (word, next) => {
 
 $.inputEvaluator = (word) => {
 	function $($) {
-		eval($);
+		return eval($);
 	}
-	$.call({}, word);
+	return $.call({}, word);
 	//this == {}, $ = word. This prevents global variable access.
 }
 
