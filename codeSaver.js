@@ -5,6 +5,9 @@ saveButton.onclick = function () {
 		return;
 	}
 	for (let i = 0; i < codeBoxArr.length; ++i) {
+		if (codeBoxArr[i] === null) {
+			continue;
+		}
 		codeBoxArr[i][7] = codeBoxArr[i][1].value
 		codeBoxArr[i][5] = codeBoxArr[i][0].style.left;
 		codeBoxArr[i][6] = codeBoxArr[i][0].style.top;
@@ -25,10 +28,16 @@ loadButton.onclick = function () {
 		return;
 	}
 	for (let i = 0; i < codeBoxArr.length; ++i) {
+		if (codeBoxArr[i] === null) {
+			continue;
+		}
 		removeBox("" + i, true);
 	}
 	codeBoxArr = JSON.parse(stringArr);
 	for (let i = 0; i < codeBoxArr.length; ++i) {
+		if (codeBoxArr[i] === null) {
+			continue;
+		}
 		codeBoxArr[i][0] = document.createElement("div");
 		codeBoxArr[i][1] = document.createElement("textarea");
 
@@ -49,8 +58,10 @@ loadButton.onclick = function () {
 	}
 	var child;
 	for (let i = 0; i < codeBoxArr.length; ++i) {
+		if (codeBoxArr[i] === null) {
+			continue;
+		}
 		let myChildren = codeBoxArr[i][0].childNodes;
-
 		if (codeBoxArr[i][3] !== -1) {
 			let primaryChild = null;
 			for (let i = 0; i < myChildren.length; ++i) {

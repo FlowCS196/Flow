@@ -75,6 +75,9 @@ function removeBox(index, override) {
     }
     //Fixing z-indices.
     for (let i = 0; i < codeBoxArr.length; ++i) {
+        if (codeBoxArr[i] === null) {
+            continue;
+        }
         if (codeBoxArr[i][0].style.zIndex > codeBoxArr[index][0].style.zIndex) {
             codeBoxArr[i][0].style.zIndex -= 1;
         }
@@ -143,6 +146,10 @@ function codeMaker() {
     }
     code.push(line);
     for (let i = 1; i < codeBoxArr.length; ++i) {
+        if (codeBoxArr[i] === null) {
+            code.push([]);
+			continue;
+		}
         tmp = codeBoxArr[i];
         line = [tmp[2], tmp[1].value, tmp[3], tmp[4]];
 
