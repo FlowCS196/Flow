@@ -7,6 +7,7 @@ textarea {
     resize: none;
     font-family: Arial, Arial, sans-serif;
     line-height: 1;
+    outline-style: none;
 }
 
 button:focus {
