@@ -272,7 +272,7 @@ function clickOnBox(e) {
 }
 
 function startDragging(box) {
-    console.log(nullIndexCount);
+    //re-ordering boxes
     currentlyDragged = box;
     for (let i = 0; i < codeBoxArr.length; ++i) {
         if (codeBoxArr[i] === null) {
