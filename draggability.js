@@ -16,6 +16,7 @@ offsetDict["f_box"] = [8, -10.919, -8, 10.919]; // 30/tan(70)
 offsetDict["s_box"] = [8, 0, -8, 0];
 offsetDict["c_box"] = [25.397, -25.397, -25.397, 20.711]; // (50 + (16 / √2))(√2 - 1), (50)(√2 - 1)
 offsetDict["i_box"] = [8, 0, -8, 0];
+var nullIndexCount = 0;
 
 window.addEventListener("mouseup", mouseUp, false);
 window.addEventListener("mousemove", moveStuff, false);
@@ -66,7 +67,12 @@ function addConnectorNodes(box) {
     box.appendChild(connector_primary);
 }
 
-function makeDraggable(box) {
+function makeDraggable(box, depth) {
+    if (depth == -1) {
+        depth = parseInt(box.id) - nullIndexCount;
+    }
+    box.style.zIndex = depth;
+    lineCanvas.style.zIndex = Math.max(depth + 1, lineCanvas.style.zIndex);
     box.addEventListener("mousedown", clickOnBox, false);
     box.style.left = offsetDict[box.className][3] + codeArea.scrollLeft + "px";
     box.style.top = offsetDict[box.className][0] + codeArea.scrollTop + "px";
@@ -266,8 +272,18 @@ function clickOnBox(e) {
 }
 
 function startDragging(box) {
+    console.log(nullIndexCount);
     currentlyDragged = box;
-    currentlyDragged.style.zIndex = 1; //You are dragging this box, it should appear in front of others.
+    for (let i = 0; i < codeBoxArr.length; ++i) {
+        if (codeBoxArr[i] === null) {
+            continue;
+        }
+        if (codeBoxArr[i][0].style.zIndex > box.style.zIndex) {
+            codeBoxArr[i][0].style.zIndex -= 1;
+        }
+    }
+    box.style.zIndex = codeBoxArr.length - nullIndexCount - 1;
+
     offsetX = -mouseX + parseFloat(box.style.left);
     offsetY = -mouseY + parseFloat(box.style.top);
 }
@@ -303,7 +319,6 @@ function mouseUp(e) {
     if (top + boxHeight > areaHeight + codeArea.scrollTop) {
         currentlyDragged.style.top = areaHeight + codeArea.scrollTop - boxHeight + offsets[0] + "px";
     }
-    currentlyDragged.style.zIndex = 0; //You aren't dragging the box anymore, no need to make it appear in front.
     boxLineOrient(currentlyDragged);
     currentlyDragged = null;
 }

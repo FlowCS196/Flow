@@ -8,6 +8,7 @@ saveButton.onclick = function () {
 		codeBoxArr[i][7] = codeBoxArr[i][1].value
 		codeBoxArr[i][5] = codeBoxArr[i][0].style.left;
 		codeBoxArr[i][6] = codeBoxArr[i][0].style.top;
+		codeBoxArr[i][8] = parseInt(codeBoxArr[i][0].style.zIndex);
 	}
 	localStorage.setItem(fileName, JSON.stringify(codeBoxArr));
 };
@@ -28,14 +29,13 @@ loadButton.onclick = function () {
 	}
 	codeBoxArr = JSON.parse(stringArr);
 	for (let i = 0; i < codeBoxArr.length; ++i) {
-		
 		codeBoxArr[i][0] = document.createElement("div");
 		codeBoxArr[i][1] = document.createElement("textarea");
 
 		codeBoxArr[i][0].id = "" + i;
 		codeBoxArr[i][0].className = codeBoxArr[i][2] + "_box";
 
-		makeDraggable(codeBoxArr[i][0]);
+		makeDraggable(codeBoxArr[i][0], codeBoxArr[i][8]);
 
 		codeBoxArr[i][1].className = codeBoxArr[i][2] + "_code";
 

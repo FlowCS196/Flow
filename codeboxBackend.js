@@ -14,9 +14,10 @@ var codeBoxArr = [];
 function addBox(type) {
     function actualAdd(index) {
         /*codeBox contains: A div that contatins a textarea and can be dragged around, a textarea that is a child of the div, a type (f, s, i, c, or e), its primary connection, its secondary connection,
-        an array of indices that hold all the boxes that have connections to this box, an x-coordinate, a y-coordinate, and a string that keeps the code of the box inside after saving.*/
+        an array of indices that hold all the boxes that have connections to this box, an x-coordinate, a y-coordinate, and a string that keeps the code of the box inside after saving.
+        It also keeps the z-index of the boxes*/
 
-        var codeBox = [document.createElement("div"), document.createElement("textarea"), type, -1, -1, "", "", ""];
+        var codeBox = [document.createElement("div"), document.createElement("textarea"), type, -1, -1, "", "", "", -1];
 
         //Give an id to the box.
         var position
@@ -31,7 +32,7 @@ function addBox(type) {
         //Give a class name to the box so that we can stylize the boxes in CSS. The names are in the format type_box, where type can be f, s, i, c, or e.
         codeBox[0].className = type + "_box";
 
-        makeDraggable(codeBox[0]);
+        makeDraggable(codeBox[0], codeBox[8]);
 
         //Give a class name to the textarea that is the child of the box. The names are in the format type_code.
         codeBox[1].className = type + "_code";
@@ -54,6 +55,7 @@ function addBox(type) {
     }
     for (let i = 0; i < codeBoxArr.length; ++i) {
         if (codeBoxArr[i] == null) {
+            nullIndexCount -= 1;
             actualAdd(i);
             return;
         }
@@ -71,6 +73,13 @@ function removeBox(index, override) {
     if (codeBoxArr[num][2] == 'f' && !override) {
         return codeBoxArr[num][0];
     }
+    //Fixing z-indices.
+    for (let i = 0; i < codeBoxArr.length; ++i) {
+        if (codeBoxArr[i][0].style.zIndex > codeBoxArr[index][0].style.zIndex) {
+            codeBoxArr[i][0].style.zIndex -= 1;
+        }
+    }
+    lineCanvas.style.zIndex -= 1;
     space.removeChild(codeBoxArr[num][0]);
     let children = codeBoxArr[num][0].childNodes;
     for (let i = 0; i < children.length; ++i) {
@@ -85,6 +94,7 @@ function removeBox(index, override) {
         }
     }
     codeBoxArr[num] = null;
+    nullIndexCount += 1;
     return null;
 }
 
