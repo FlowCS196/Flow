@@ -71,7 +71,7 @@ loadButton.onclick = function () {
 			}
 			let newLine = document.createElementNS("http://www.w3.org/2000/svg", "line");
 			newLine.className.baseVal = "primary_line";
-			loadLine(newLine, primaryChild, primaryTarget)
+			loadLine(newLine, primaryChild, primaryTarget);
 		}
 		if (codeBoxArr[i][4] !== - 1) {
 			let secondaryChild = null;
@@ -93,6 +93,7 @@ loadButton.onclick = function () {
 			}
 			let newLine = document.createElementNS("http://www.w3.org/2000/svg", "line");
 			newLine.className.baseVal = "secondary_line";
+			loadLine(newLine, secondaryChild, secondaryTarget);
 		}
 	}
 };
