@@ -100,7 +100,7 @@ function loadLine(myLine, origin, target) {
     myLine.id = "l" + lineIDcounter;
     lineIDcounter += 1; //Each line has a unique ID. This would take millenia to break.
     origin.line = myLine;
-    target[myLine.id] = myLine;
+    target.lines[myLine.id] = myLine;
     let rect = origin.getBoundingClientRect();
     let x1 = rect.left + rect.width / 2  - 160 + codeArea.scrollLeft;
     let y1 = rect.top + rect.height / 2 - 40 + codeArea.scrollTop;
