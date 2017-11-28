@@ -1,9 +1,12 @@
 * {
     margin: 0;
     padding: 0;
+
 }
 textarea {
     resize: none;
+    font-family: Arial, Arial, sans-serif;
+    line-height: 1;
 }
 
 button:focus {
@@ -14,6 +17,7 @@ body {
     background-color: black;
 }
 #textbox {
+    font-size: 100%;
     border: none;
     width: calc(100% - 30px);
     height: calc(100% - 30px);
@@ -106,6 +110,7 @@ body {
 }
 
 .s_code {
+    font-size: 67.5%;
     border:none;
     width: 144px;
     height: 44px;
@@ -120,6 +125,7 @@ body {
 }
 
 .c_code {
+    font-size: 67.5%;
     border: none;
     width: 74.793px; /* 84√2 - 44 */
     height: 44px;
@@ -139,6 +145,7 @@ body {
 }
 
 .f_code { 
+    font-size: 67.5%;
     border:none;
     width: 128px;
     height: 44px;
@@ -164,6 +171,7 @@ body {
 }
 
 .i_code {
+    font-size: 65%;
     border:none;
     width: 110.309px; /* 80√2 */
     height: 42.426px; /* 30√2 */
