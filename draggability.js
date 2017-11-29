@@ -67,9 +67,9 @@ function addConnectorNodes(box) {
     box.appendChild(connector_primary);
 }
 
-function makeDraggable(box, depth) {
-    if (depth === -1) {
-        depth = parseInt(box.id) - nullIndexCount;
+function makeDraggable(box, savedDepth, depth) {
+    if (savedDepth !== -1) { //no saved depth
+        depth = savedDepth;
     }
     box.style.zIndex = depth;
     lineCanvas.style.zIndex = Math.max(depth + 1, lineCanvas.style.zIndex);

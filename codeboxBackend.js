@@ -12,55 +12,47 @@ var codeBoxArr = [];
  *                      'e' means 'end'. The program halts when these boxes are reached. The code inside them is executed before this happens.
  */
 function addBox(type) {
-    function actualAdd(index) {
-        /*codeBox contains: A div that contatins a textarea and can be dragged around, a textarea that is a child of the div, a type (f, s, i, c, or e), its primary connection, its secondary connection,
-        an array of indices that hold all the boxes that have connections to this box, an x-coordinate, a y-coordinate, and a string that keeps the code of the box inside after saving.
-        It also keeps the z-index of the boxes*/
+    /*codeBox contains: A div that contatins a textarea and can be dragged around, a textarea that is a child of the div, a type (f, s, i, c, or e), its primary connection, its secondary connection,
+    an array of indices that hold all the boxes that have connections to this box, an x-coordinate, a y-coordinate, and a string that keeps the code of the box inside after saving.
+    It also keeps the z-index of the boxes*/
 
-        var codeBox = [document.createElement("div"), document.createElement("textarea"), type, -1, -1, "", "", "", -1];
+    var codeBox = [document.createElement("div"), document.createElement("textarea"), type, -1, -1, "", "", "", -1];
 
-        //Give an id to the box.
-        var position;
-        for (position = 0; position < codeBoxArr.length; ++position) {
-            if (codeBoxArr[position] === null) {
-                break;
-            }
-        }
-
-        codeBox[0].id = "" + position;
-
-        //Give a class name to the box so that we can stylize the boxes in CSS. The names are in the format type_box, where type can be f, s, i, c, or e.
-        codeBox[0].className = type + "_box";
-
-        makeDraggable(codeBox[0], codeBox[8]);
-
-        //Give a class name to the textarea that is the child of the box. The names are in the format type_code.
-        codeBox[1].className = type + "_code";
-
-        if (type === "f") {
-            codeBox[1].value = "//START"
-        } else {
-            codeBox[1].value = "";
-        }
-
-        codeBox[0].appendChild(codeBox[1]);
-        space.appendChild(codeBox[0]);
-
-        if (position === codeBoxArr.length) {
-            codeBoxArr.push(codeBox);
-        } else {
-            codeBoxArr[position] = codeBox;
-        }
-
-    }
+    //Give an id to the box.;
+    var position = -1
     for (let i = 0; i < codeBoxArr.length; ++i) {
-        if (codeBoxArr[i] === null) {
+        if (codeBoxArr[position] === null) {
+            position = i;
             nullIndexCount -= 1;
-            actualAdd(i);
-            return;
         }
     }
-    actualAdd(codeBoxArr.length);
+    if (position === -1) {
+        position = codeBoxArr.length;
+    }
+
+    codeBox[0].id = "" + position;
+
+    //Give a class name to the box so that we can stylize the boxes in CSS. The names are in the format type_box, where type can be f, s, i, c, or e.
+    codeBox[0].className = type + "_box";
+
+    makeDraggable(codeBox[0], codeBox[8], codeBoxArr.length - nullIndexCount);
+
+    //Give a class name to the textarea that is the child of the box. The names are in the format type_code.
+    codeBox[1].className = type + "_code";
+
+    if (type === "f") {
+        codeBox[1].value = "//START"
+    } else {
+        codeBox[1].value = "";
+    }
+
+    codeBox[0].appendChild(codeBox[1]);
+    space.appendChild(codeBox[0]);
+    if (position === codeBoxArr.length) {
+        codeBoxArr.push(codeBox);
+    } else {
+        codeBoxArr[position] = codeBox;
+    }
 }
  
 /**
