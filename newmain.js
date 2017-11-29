@@ -19,7 +19,7 @@ runner.onclick = function() {
         } else if (event.data[0] === 'c') {
             box.value = "";
         } else if (event.data[0] === 'i') {
-            let entry = prompt("Enter Input for " + event.data[2]);
+            let entry = prompt("Enter input for " + event.data[2]);
             if (entry === null || entry === "") {
                 worker.terminate();
                 worker = null;
