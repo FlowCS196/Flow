@@ -82,10 +82,16 @@ function makeDraggable(box, savedDepth, depth) {
 function deleteBox(e) {
     if (e.keyCode === 8) { //backspace
         e.preventDefault(); //for some reason, backspace can go to the previous page even when it shouldn't be able to. This prevents that.
+         //deleting a character from the textarea.
         let potentialText = document.activeElement;
+        let start = potentialText.selectionStart;
+        let end = potentialText.selectionEnd;
+        if (start === end && start !== 0) {
+            start -= 1;
+        }
         if (potentialText.tagName === "TEXTAREA") {
-            //deleting a character from the textarea.
-            potentialText.value = potentialText.value.substring(0, potentialText.value.length - 1);
+            potentialText.value = potentialText.value.substring(0, start) + potentialText.value.substring(end, potentialText.length);
+            potentialText.setSelectionRange(start, start);
         }
         if (currentlyDragged) {
             currentlyDragged = removeBox(currentlyDragged.id, false);

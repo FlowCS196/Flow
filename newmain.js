@@ -19,7 +19,13 @@ runner.onclick = function() {
         } else if (event.data[0] === 'c') {
             box.value = "";
         } else if (event.data[0] === 'i') {
-            worker.postMessage(['i', event.data[1], event.data[2] + "=" + prompt("Enter Input", "0") + ";"]);
+            let entry = prompt("Enter Input");
+            if (entry === null || entry === "") {
+                worker.terminate();
+                worker = null;
+            } else {
+                worker.postMessage(['i', event.data[1], event.data[2] + "=" + entry]);
+            }
         } else if (event.data[0] === 'e') {
             worker.terminate();
             worker = null;
