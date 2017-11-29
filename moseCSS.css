@@ -132,8 +132,6 @@ body {
     height: 44px;
     transform: rotate(-45deg) translate(-10.887px, 17.198px); /* 42 - 22√2, 21√2 - 12.5 */
     background-color: #FAFAD2; /*YELLOW*/
-    /*transform: rotate(-45deg);*/
-    /*transform-origin: 90% 30%;*/
 }
 
 .c_box {
@@ -152,10 +150,6 @@ body {
     height: 44px;
     transform: skew(20deg) translate(8px, 0px);
     background-color: #F08080; /*RED*/
-    /*-webkit-transform: skew(20deg);
-       -moz-transform: skew(20deg);
-         -o-transform: skew(20deg);
-    */
 }
 
 .f_box {
@@ -165,18 +159,14 @@ body {
     width: 144px;
     border: 8px solid #8B0000;
     transform: skew(-20deg);
-    /*-webkit-transform: skew(-20deg);
-       -moz-transform: skew(-20deg);
-         -o-transform: skew(-20deg);
-    */
 }
 
 .i_code {
-    font-size: 65%;
+    font-size: 67.5%;
     border:none;
-    width: 110.309px; /* 80√2 */
-    height: 42.426px; /* 30√2 */
-    transform: translate(23.431px, 8.787px); /* 80 - 40√2, 30 - 15√2 */
+    width: 108.779px; /* 64√26/3 */
+    height: 44px;
+    transform: translate(25.610px, 8px); /* 80 - 32√26/3 */
     background-color: #00BFFF;
 }
 
