@@ -27,6 +27,7 @@ loadButton.onclick = function () {
 		alert("No such file exists. Did you type correctly?");
 		return;
 	}
+	box.value = ""; //clean the console
 	for (let i = 0; i < codeBoxArr.length; ++i) {
 		if (codeBoxArr[i] === null) {
 			continue;
