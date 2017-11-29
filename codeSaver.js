@@ -1,7 +1,7 @@
 var saveButton = document.getElementById("saveButton");
 saveButton.onclick = function () {
 	let fileName = prompt("File Name?");
-	if (fileName === null) {
+	if (fileName == null) {
 		return;
 	}
 	for (let i = 0; i < codeBoxArr.length; ++i) {
@@ -19,7 +19,7 @@ saveButton.onclick = function () {
 var loadButton = document.getElementById("loadButton");
 loadButton.onclick = function () {
 	let fileName = prompt("File Name?");
-	if (fileName === null) {
+	if (fileName == null) {
 		return;
 	}
 	let stringArr = localStorage.getItem(fileName);
@@ -68,7 +68,7 @@ loadButton.onclick = function () {
 			let primaryChild = null;
 			for (let i = 0; i < myChildren.length; ++i) {
 				child = myChildren[i];
-				if (child.className === "connector_primary") {
+				if (child.className == "connector_primary") {
 					primaryChild = child;
 					break;
 				}
@@ -77,7 +77,7 @@ loadButton.onclick = function () {
 			let primaryTarget = null;
 			for (let i = 0; i < targetChildren.length; ++i) {
 				child = targetChildren[i];
-				if (child.className === "connector_receiver") {
+				if (child.className == "connector_receiver") {
 					primaryTarget = child;
 					break;
 				}
@@ -90,7 +90,7 @@ loadButton.onclick = function () {
 			let secondaryChild = null;
 			for (let i = 0; i < myChildren.length; ++i) {
 				child = myChildren[i];
-				if (child.className === "connector_secondary") {
+				if (child.className == "connector_secondary") {
 					secondaryChild = child;
 					break;
 				}
@@ -99,7 +99,7 @@ loadButton.onclick = function () {
 			let secondaryTarget = null;
 			for (let i = 0; i < targetChildren.length; ++i) {
 				child = targetChildren[i];
-				if (child.className === "connector_receiver") {
+				if (child.className == "connector_receiver") {
 					secondaryTarget = child;
 					break;
 				}
