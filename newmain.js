@@ -14,13 +14,13 @@ runner.onclick = function() {
     worker = new Worker("newworker.js");
     worker.onmessage = function(event) {
         var pos;
-        if (event.data[0] == 'p') {
+        if (event.data[0] === 'p') {
             box.value += "" + event.data[1];
-        } else if (event.data[0] == 'c') {
+        } else if (event.data[0] === 'c') {
             box.value = "";
-        } else if (event.data[0] == 'i') {
+        } else if (event.data[0] === 'i') {
             worker.postMessage(['i', event.data[1], event.data[2] + "=" + prompt("Enter Input", "0") + ";"]);
-        } else if (event.data[0] == 'e') {
+        } else if (event.data[0] === 'e') {
             worker.terminate();
             worker = null;
         }
@@ -29,7 +29,7 @@ runner.onclick = function() {
 }
 
 stopper.onclick = function() {
-    if (worker == null)
+    if (worker === null)
         return;
     else {
         worker.terminate();

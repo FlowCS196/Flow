@@ -20,9 +20,9 @@ function addBox(type) {
         var codeBox = [document.createElement("div"), document.createElement("textarea"), type, -1, -1, "", "", "", -1];
 
         //Give an id to the box.
-        var position
+        var position;
         for (position = 0; position < codeBoxArr.length; ++position) {
-            if (codeBoxArr[position] == null) {
+            if (codeBoxArr[position] === null) {
                 break;
             }
         }
@@ -37,7 +37,7 @@ function addBox(type) {
         //Give a class name to the textarea that is the child of the box. The names are in the format type_code.
         codeBox[1].className = type + "_code";
 
-        if (type == "f") {
+        if (type === "f") {
             codeBox[1].value = "//START"
         } else {
             codeBox[1].value = "";
@@ -46,7 +46,7 @@ function addBox(type) {
         codeBox[0].appendChild(codeBox[1]);
         space.appendChild(codeBox[0]);
 
-        if (position == codeBoxArr.length) {
+        if (position === codeBoxArr.length) {
             codeBoxArr.push(codeBox);
         } else {
             codeBoxArr[position] = codeBox;
@@ -54,7 +54,7 @@ function addBox(type) {
 
     }
     for (let i = 0; i < codeBoxArr.length; ++i) {
-        if (codeBoxArr[i] == null) {
+        if (codeBoxArr[i] === null) {
             nullIndexCount -= 1;
             actualAdd(i);
             return;
@@ -70,7 +70,7 @@ function addBox(type) {
 function removeBox(index, override) {
     let num = parseInt(index);
     //Don't delete first boxes unless override is true.
-    if (codeBoxArr[num][2] == 'f' && !override) {
+    if (codeBoxArr[num][2] === 'f' && !override) {
         return codeBoxArr[num][0];
     }
     //Fixing z-indices.
@@ -87,7 +87,7 @@ function removeBox(index, override) {
     let children = codeBoxArr[num][0].childNodes;
     for (let i = 0; i < children.length; ++i) {
         child = children[i];
-        if (child.tagName != "TEXTAREA") {
+        if (child.tagName !== "TEXTAREA") {
             if (child.line) {
                 destroyAnchoredLine(child.line);
             }
@@ -120,7 +120,7 @@ function secondaryConnect(startIndex, endIndex) {
 function primaryUnconnectStart(startIndex) {
     let start = parseInt(startIndex);
     let end = codeBoxArr[start][3];
-    if (end == -1) {
+    if (end === -1) {
         return;
     }
     codeBoxArr[start][3] = -1
@@ -130,7 +130,7 @@ function primaryUnconnectStart(startIndex) {
 function secondaryUnconnectStart(startIndex) {
     let start = parseInt(startIndex);
     let end = codeBoxArr[start][4];
-    if (end == -1) {
+    if (end === -1) {
         return;
     }
     codeBoxArr[start][4] = -1;
@@ -141,7 +141,7 @@ function codeMaker() {
     code = [];
     let tmp = codeBoxArr[0];
     let line = ['s', tmp[1].value, tmp[3]];
-    if (line[2] == -1) {
+    if (line[2] === -1) {
         line = ['e', line[1]];
     }
     code.push(line);
@@ -153,7 +153,7 @@ function codeMaker() {
         tmp = codeBoxArr[i];
         line = [tmp[2], tmp[1].value, tmp[3], tmp[4]];
 
-        if (line[0] != 'c' && line[2] == -1) {
+        if (line[0] !== 'c' && line[2] === -1) {
             line = ['e', line[1]];
         }
         code.push(line);

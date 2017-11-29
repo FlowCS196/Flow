@@ -31,12 +31,12 @@ function addConnectorNodes(box) {
     let connector_primary = document.createElement("div");
     connector_primary.className = "connector_primary";
 
-    if (box.className == "f_box") {
+    if (box.className === "f_box") {
         connector_receiver.style.transform = "skew(20deg)";
         connector_primary.style.transform = "skew(20deg)";
     }
 
-    if (box.className == "c_box") {
+    if (box.className === "c_box") {
         connector_receiver.style.left = "-13.657px"; //8 + 8/√2
         connector_receiver.style.top = "-13.657px"; //8 + 8/√2
         connector_primary.style.left = "calc(100% - 2.343px)"; //8 - 8/√2
@@ -68,7 +68,7 @@ function addConnectorNodes(box) {
 }
 
 function makeDraggable(box, depth) {
-    if (depth == -1) {
+    if (depth === -1) {
         depth = parseInt(box.id) - nullIndexCount;
     }
     box.style.zIndex = depth;
@@ -80,8 +80,8 @@ function makeDraggable(box, depth) {
 }
 
 function deleteBox(e) {
-    if (e.keyCode == 8) { //backspace
-        if (document.activeElement.tagName != "TEXTAREA") {
+    if (e.keyCode === 8) { //backspace
+        if (document.activeElement.tagName !== "TEXTAREA") {
             e.preventDefault();
         }
         if (currentlyDragged) {
@@ -125,9 +125,9 @@ function orientLine(myLine, x1, y1, x2, y2) {
         myLine.setAttribute("y2", y2);
     }
 
-    if (myLine.className.baseVal == "receiver_line") {
+    if (myLine.className.baseVal === "receiver_line") {
         let length = Math.sqrt((x1 - myLine.trueX) * (x1 - myLine.trueX) + (y1 - myLine.trueY) * (y1 - myLine.trueY));
-        if (length == 0) {
+        if (length === 0) {
             return;
         } else {
             let newLength = Math.max(12, length);
@@ -141,7 +141,7 @@ function orientLine(myLine, x1, y1, x2, y2) {
     } else {
         minimalOrient();
         let length = Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
-        if (length == 0) {
+        if (length === 0) {
             return;
         }
         let newLength = Math.max(4, length - 8);
@@ -152,7 +152,7 @@ function orientLine(myLine, x1, y1, x2, y2) {
 }
 
 function destroyAnchoredLine(myLine) {
-    if (myLine.originNode.className == "connector_primary") {
+    if (myLine.originNode.className === "connector_primary") {
         primaryUnconnectStart(myLine.originNode.parentNode.id);
     } else {
         secondaryUnconnectStart(myLine.originNode.parentNode.id);
@@ -170,12 +170,12 @@ function anchorLine(e) {
     if (!currentLine) {
         return;
     }
-    if ((currentLine.className.baseVal == "receiver_line") == (this.className == "connector_receiver")) {
+    if ((currentLine.className.baseVal === "receiver_line") === (this.className === "connector_receiver")) {
         return;
     }
     currentLine.id = "l" + lineIDcounter;
     lineIDcounter += 1; //Each line has a unique ID. This would take millenia to break.
-    if (this.className == "connector_receiver") {
+    if (this.className === "connector_receiver") {
         if (currentLine.originNode.line) {
             destroyAnchoredLine(currentLine.originNode.line);
         }
@@ -193,7 +193,7 @@ function anchorLine(e) {
     let rect = this.getBoundingClientRect();
     let posX = rect.left + rect.width / 2  - 160 + codeArea.scrollLeft;
     let posY = rect.top + rect.height / 2 - 40 + codeArea.scrollTop;
-    if (this.className == "connector_receiver") {
+    if (this.className === "connector_receiver") {
         orientLine(currentLine, currentLine.x1.baseVal.value, currentLine.y1.baseVal.value, posX, posY);
     } else {
         orientLine(currentLine, posX, posY, currentLine.x2.baseVal.value, currentLine.y2.baseVal.value);
@@ -202,7 +202,7 @@ function anchorLine(e) {
     //We are going to set up primary/seconday connections.
     let startID = currentLine.originNode.parentNode.id;
     let endID = currentLine.receiverNode.parentNode.id;
-    if (currentLine.originNode.className == "connector_primary") {
+    if (currentLine.originNode.className === "connector_primary") {
         primaryConnect(startID, endID);
     }
     else {
@@ -214,7 +214,7 @@ function anchorLine(e) {
 function startDrawing(myConnector) {
     let newLine = document.createElementNS("http://www.w3.org/2000/svg", "line");
     newLine.className.baseVal = myConnector.className.substring(10) + "_line"; //receiver, primary, or secondary + _line, based on where we are starting from.
-    if (newLine.className.baseVal == "receiver_line") {
+    if (newLine.className.baseVal === "receiver_line") {
         newLine.receiverNode = myConnector;
         newLine.originNode = null;
     } else {
@@ -224,7 +224,7 @@ function startDrawing(myConnector) {
     let rect = myConnector.getBoundingClientRect();
     let posX = rect.left + rect.width / 2  - 160 + codeArea.scrollLeft;
     let posY = rect.top + rect.height / 2 - 40 + codeArea.scrollTop;
-    if (newLine.className.baseVal == "receiver_line") {
+    if (newLine.className.baseVal === "receiver_line") {
         newLine.trueX = posX
         newLine.trueY = posY
         orientLine(newLine, posX + 12, posY, posX + 8, posY);
@@ -239,7 +239,7 @@ function startDrawing(myConnector) {
 
 
 function clickOnConnector(e) {
-    if (e.button == 2) { //right-click
+    if (e.button === 2) { //right-click
         e.preventDefault();
         if (this.line) {
             destroyAnchoredLine(this.line);
@@ -253,7 +253,7 @@ function clickOnConnector(e) {
 }
 
 function startScrolling(e) {
-    if (e.button == 2) { //right-click
+    if (e.button === 2) { //right-click
         return;
     }
     if (!currentlyDragged && !currentLine) { //not dragging boxes or drawing lines
@@ -264,7 +264,7 @@ function startScrolling(e) {
 }
 
 function clickOnBox(e) {
-    if (e.button != 2) { //not right-click
+    if (e.button !== 2) { //not right-click
         if (!currentLine) { //not drawing connection lines
             startDragging(this);
         }
@@ -294,7 +294,7 @@ function mouseUp(e) {
         currentLine = null;
         return;
     }
-    if (currentlyDragged == null) {
+    if (currentlyDragged === null) {
         currentlyScrolling = false;
         return;
     }
@@ -327,7 +327,7 @@ function boxLineOrient(box) {
     let children = box.childNodes;
     for (let i = 0; i < children.length; ++i) {
         child = children[i];
-        if (child.tagName != "TEXTAREA") {
+        if (child.tagName !== "TEXTAREA") {
             if (child.line) {
                 orientAnchoredLine(child.line);
             }
@@ -342,7 +342,7 @@ function moveStuff(e) {
     mouseX = e.pageX;
     mouseY = e.pageY;
     if (currentLine) {
-        if (currentLine.className.baseVal == "receiver_line") {
+        if (currentLine.className.baseVal === "receiver_line") {
             orientLine(currentLine, mouseX + offsetX, mouseY + offsetY, currentLine.x2.baseVal.value, currentLine.y2.baseVal.value);
         } else {
             orientLine(currentLine, currentLine.x1.baseVal.value, currentLine.y1.baseVal.value, mouseX + offsetX, mouseY + offsetY);
