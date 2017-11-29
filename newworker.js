@@ -5,7 +5,7 @@ function write (word) {
 }
 
 function writeln (word) {
-	printer(word + '\n');
+	write(word + '\n');
 }
 
 function clean () {
