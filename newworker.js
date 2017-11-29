@@ -8,7 +8,7 @@ function writeln (word) {
 	write(word + '\n');
 }
 
-function clean () {
+function clear () {
 	postMessage(['c']);
 }
 

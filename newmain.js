@@ -7,8 +7,7 @@ var runner = document.getElementById('runButton');
 var stopper = document.getElementById('stopButton');
 runner.onclick = function() {
     var funcs = codeMaker();
-    //box.value = JSON.stringify(funcs);
-    if (worker != null) {
+    if (worker !== null) {
         worker.terminate();
     }
     worker = new Worker("newworker.js");
@@ -31,6 +30,7 @@ runner.onclick = function() {
             worker = null;
         }
     };
+    box.value = "";
     worker.postMessage(funcs);
 }
 
